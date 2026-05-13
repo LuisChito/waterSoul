@@ -1,0 +1,35 @@
+# Water Soul — Sistema Experto
+
+Test inteligente que conecta tu personalidad con un cuerpo
+de agua real del mundo, usando lógica de ingeniería (SE).
+
+## Estructura del proyecto
+
+```
+water_soul/
+├── base_hechos.py          ← Componente 1: Base de Hechos
+├── base_conocimientos.py   ← Componente 2: Base de Conocimientos
+├── modulo_explicacion.py   ← Componente 3: Módulo de Explicación
+├── motor_inferencia.py     ← Componente 4: Motor de Inferencia
+├── interfaz.html           ← Interfaz de usuario (web)
+└── README.md
+```
+
+## Cómo ejecutar (consola)
+
+```bash
+python motor_inferencia.py
+```
+
+## Cómo usar la interfaz web
+
+Abrir `interfaz.html` en cualquier navegador. No requiere servidor.
+
+## Ramas del árbol de decisión
+
+| Rama | Reacción | Entorno  | Percepción | Estilo      | Resultado              |
+|------|----------|----------|------------|-------------|------------------------|
+| 1    | lago     | abierto  | alegre     | relax       | Laguna de Bacalar, MX  |
+| 2    | mar      | abierto  | fuerte     | adrenalina  | Playa de Nazaré, PT    |
+| 3    | rio      | silencio | profundo   | explorar    | Río Secreto, MX        |
+| 4    | nube     | energia  | activo     | explorar    | Geysers El Tatio, CL   |
