@@ -409,11 +409,97 @@ class WaterSoulApp(tk.Tk):
         btn_row = tk.Frame(self.inner, bg=C["surface"])
         btn_row.pack(fill="x", padx=22, pady=16)
 
+        btn_info = tk.Frame(btn_row, bg=C["surface"])
+        btn_info.pack(side="left")
+
+        tk.Button(btn_info, text="📄  Base de hechos", font=FONT_BODY,
+                  fg=C["blue_600"], bg=C["blue_50"],
+                  activebackground=C["border"],
+                  relief="flat", bd=0, padx=14, pady=8,
+                  cursor="hand2",
+                  command=lambda: self._mostrar_detalle(
+                      "Base de hechos",
+                      self._formatear_base_hechos(),
+                  )).pack(side="left", padx=(0, 8))
+
+        tk.Button(btn_info, text="🧠  Base de conocimientos", font=FONT_BODY,
+                  fg=C["blue_600"], bg=C["blue_50"],
+                  activebackground=C["border"],
+                  relief="flat", bd=0, padx=14, pady=8,
+                  cursor="hand2",
+                  command=lambda: self._mostrar_detalle(
+                      "Base de conocimientos",
+                      self._formatear_base_conocimientos(regla),
+                  )).pack(side="left")
+
         tk.Button(btn_row, text="🔄  Nueva consulta", font=FONT_BODY,
                   fg=C["white"], bg=C["blue_400"],
                   activebackground=C["blue_600"],
                   relief="flat", bd=0, padx=16, pady=8,
                   cursor="hand2", command=self._restart).pack(side="right")
+
+    def _mostrar_detalle(self, titulo, contenido):
+        ventana = tk.Toplevel(self)
+        ventana.title(titulo)
+        ventana.configure(bg=C["bg"])
+        ventana.geometry("620x420")
+        ventana.resizable(False, False)
+
+        marco = tk.Frame(ventana, bg=C["surface"], highlightbackground=C["border"],
+                         highlightthickness=1)
+        marco.pack(fill="both", expand=True, padx=16, pady=16)
+
+        tk.Label(marco, text=titulo, font=FONT_HEAD, fg=C["blue_800"],
+                 bg=C["surface"]).pack(anchor="w", padx=16, pady=(16, 8))
+
+        cuerpo = tk.Frame(marco, bg=C["surface"])
+        cuerpo.pack(fill="both", expand=True, padx=16, pady=(0, 16))
+
+        texto = tk.Text(cuerpo, font=FONT_BODY, fg=C["blue_800"], bg=C["blue_50"],
+                        relief="flat", bd=0, wrap="word", padx=12, pady=12)
+        texto.insert("1.0", contenido)
+        texto.configure(state="disabled")
+
+        scroll = ttk.Scrollbar(cuerpo, orient="vertical", command=texto.yview)
+        texto.configure(yscrollcommand=scroll.set)
+
+        texto.pack(side="left", fill="both", expand=True)
+        scroll.pack(side="right", fill="y")
+
+    def _formatear_base_hechos(self):
+        etiquetas = {
+            "reaccion": "Reacción",
+            "entorno": "Entorno",
+            "percepcion": "Percepción",
+            "estilo": "Estilo",
+        }
+        lineas = ["Hechos registrados:\n"]
+        for criterio, valor in self.hechos.items():
+            valor_mostrar = "Sin respuesta" if valor is None else valor
+            lineas.append(f"- {etiquetas.get(criterio, criterio.title())}: {valor_mostrar}")
+        return "\n".join(lineas)
+
+    def _formatear_base_conocimientos(self, regla_actual):
+        lineas = ["Reglas del sistema:\n"]
+        for regla in self.base_conocim.reglas:
+            condiciones = regla["condiciones"]
+            conclusion = regla["conclusion"]
+            lineas.append(f"{regla['id']}")
+            lineas.append(
+                "  IF "
+                f"reaccion={condiciones['reaccion']}, "
+                f"entorno={condiciones['entorno']}, "
+                f"percepcion={condiciones['percepcion']}, "
+                f"estilo={condiciones['estilo']}"
+            )
+            lineas.append(
+                "  THEN "
+                f"tipo={conclusion['tipo']}, esencia={conclusion['esencia']}, lugar={conclusion['lugar']}"
+            )
+            if regla_actual and regla["id"] == regla_actual["id"]:
+                lineas.append("  -> Esta es la regla que se activó")
+            lineas.append("")
+        return "\n".join(lineas).strip()
 
     def _show_no_match(self):
         self._clear_inner()
