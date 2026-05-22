@@ -1,0 +1,100 @@
+{
+  "reglas": [
+    {
+      "id": "USUARIO_RAMA 1",
+      "condiciones": {
+        "reaccion": "rio",
+        "entorno": "energia",
+        "percepcion": "profundo",
+        "estilo": "explorar"
+      },
+      "conclusion": {
+        "tipo": "RAMA 1",
+        "esencia": "Prueba 1",
+        "lugar": "Lugar 1"
+      }
+    },
+    {
+      "id": "USUARIO_TEST",
+      "condiciones": {
+        "reaccion": "rio",
+        "entorno": "silencio",
+        "percepcion": "profundo",
+        "estilo": "explorar"
+      },
+      "conclusion": {
+        "tipo": "RÍOX",
+        "esencia": "Prueba",
+        "lugar": "Lugar prueba"
+      }
+    },
+    {
+      "id": "RAMA_1",
+      "condiciones": {
+        "reaccion": "lago",
+        "entorno": "abierto",
+        "percepcion": "alegre",
+        "estilo": "relax"
+      },
+      "conclusion": {
+        "tipo": "LAGUNA",
+        "esencia": "Reflejo de Paz",
+        "lugar": "Laguna de Bacalar (Quintana Roo, México)"
+      }
+    },
+    {
+      "id": "RAMA_2",
+      "condiciones": {
+        "reaccion": "mar",
+        "entorno": "abierto",
+        "percepcion": "fuerte",
+        "estilo": "adrenalina"
+      },
+      "conclusion": {
+        "tipo": "PLAYA",
+        "esencia": "Protector Resiliente",
+        "lugar": "Playa de Nazaré (Portugal)"
+      }
+    },
+    {
+      "id": "RAMA_3",
+      "condiciones": {
+        "reaccion": "rio",
+        "entorno": "silencio",
+        "percepcion": "profundo",
+        "estilo": "explorar"
+      },
+      "conclusion": {
+        "tipo": "RÍO",
+        "esencia": "Explorador Incansable",
+        "lugar": "Río Secreto (Quintana Roo, México)"
+      }
+    },
+    {
+      "id": "RAMA_4",
+      "condiciones": {
+        "reaccion": "nube",
+        "entorno": "energia",
+        "percepcion": "activo",
+        "estilo": "explorar"
+      },
+      "conclusion": {
+        "tipo": "GÉISER",
+        "esencia": "Espíritu Libre",
+        "lugar": "Geysers El Tatio (Chile)"
+      }
+    }
+  ],
+  "textos": {
+    "RÍOX": {
+      "descripcion": "desc",
+      "recomendacion": "rec",
+      "dato_lugar": "dato"
+    },
+    "RAMA 1": {
+      "descripcion": "Desc 1",
+      "recomendacion": "Rec 1",
+      "dato_lugar": "Dato 1"
+    }
+  }
+}

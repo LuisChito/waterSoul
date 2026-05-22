@@ -7,6 +7,10 @@
 #  conocimiento experto del sistema (árbol de decisión).
 # ============================================================
 
+import copy
+import json
+import os
+
 
 class BaseDeConocimientos:
     """
@@ -21,8 +25,15 @@ class BaseDeConocimientos:
     árbol de decisión definido en el diseño del SE.
     """
 
+    RUTA_DATOS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "arbol_conocimiento.json")
+
     def __init__(self):
-        self.reglas = [
+        self._datos = self._cargar_datos()
+        self.reglas = self._datos.get("reglas", copy.deepcopy(self._reglas_predeterminadas()))
+        self.textos = self._datos.get("textos", {})
+
+    def _reglas_predeterminadas(self) -> list:
+        return [
 
             # ── RAMA 1 ─────────────────────────────────────────
             {
@@ -93,6 +104,31 @@ class BaseDeConocimientos:
     # Consulta de reglas
     # ----------------------------------------------------------
 
+    def _cargar_datos(self) -> dict:
+        if os.path.exists(self.RUTA_DATOS):
+            try:
+                with open(self.RUTA_DATOS, "r", encoding="utf-8") as archivo:
+                    datos = json.load(archivo)
+                if isinstance(datos, dict):
+                    return datos
+            except (OSError, json.JSONDecodeError):
+                pass
+
+        datos = {
+            "reglas": copy.deepcopy(self._reglas_predeterminadas()),
+            "textos": {},
+        }
+        self._guardar_datos(datos)
+        return datos
+
+    def _guardar_datos(self, datos: dict) -> None:
+        with open(self.RUTA_DATOS, "w", encoding="utf-8") as archivo:
+            json.dump(datos, archivo, ensure_ascii=False, indent=2)
+
+    def _persistir(self) -> None:
+        self._datos = {"reglas": self.reglas, "textos": self.textos}
+        self._guardar_datos(self._datos)
+
     def buscar_regla(self, hechos_dict: dict) -> dict | None:
         """
         Recorre las reglas y retorna la primera cuyas
@@ -109,9 +145,9 @@ class BaseDeConocimientos:
                 return regla
         return None
 
-    def agregar_regla(self, condiciones: dict, conclusion: dict, regla_id: str | None = None) -> dict:
+    def agregar_regla(self, condiciones: dict, conclusion: dict, regla_id: str | None = None, textos: dict | None = None) -> dict:
         """
-        Agrega una regla nueva a la base de conocimientos en memoria.
+        Agrega una regla nueva al árbol de conocimiento persistente.
 
         La nueva regla se inserta al inicio para que tenga prioridad
         en consultas posteriores con las mismas condiciones.
@@ -122,7 +158,16 @@ class BaseDeConocimientos:
             "conclusion": dict(conclusion),
         }
         self.reglas.insert(0, nueva_regla)
+        if textos:
+            tipo = conclusion.get("tipo")
+            if tipo:
+                self.textos[tipo] = dict(textos)
+        self._persistir()
         return nueva_regla
+
+    def obtener_textos(self) -> dict:
+        """Retorna una copia de los textos persistidos por tipo."""
+        return copy.deepcopy(self.textos)
 
     def listar_reglas(self) -> list:
         """Retorna los IDs de todas las reglas registradas."""

@@ -145,6 +145,7 @@ class WaterSoulApp(tk.Tk):
         self.base_hechos  = BaseDeHechos()
         self.base_conocim = BaseDeConocimientos()
         self.mod_expl     = ModuloExplicacion()
+        self.mod_expl.TEXTOS.update(self.base_conocim.obtener_textos())
 
         # Estado
         self.current   = 0
@@ -636,12 +637,13 @@ class WaterSoulApp(tk.Tk):
                     "lugar": lugar,
                 },
                 regla_id=f"USUARIO_{tipo}",
+                textos={
+                    "descripcion": descripcion,
+                    "recomendacion": recomendacion,
+                    "dato_lugar": dato_lugar,
+                },
             )
-            self.mod_expl.TEXTOS[tipo] = {
-                "descripcion": descripcion,
-                "recomendacion": recomendacion,
-                "dato_lugar": dato_lugar,
-            }
+            self.mod_expl.TEXTOS.update(self.base_conocim.obtener_textos())
             ventana.destroy()
             self._show_result()
 
