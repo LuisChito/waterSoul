@@ -109,6 +109,21 @@ class BaseDeConocimientos:
                 return regla
         return None
 
+    def agregar_regla(self, condiciones: dict, conclusion: dict, regla_id: str | None = None) -> dict:
+        """
+        Agrega una regla nueva a la base de conocimientos en memoria.
+
+        La nueva regla se inserta al inicio para que tenga prioridad
+        en consultas posteriores con las mismas condiciones.
+        """
+        nueva_regla = {
+            "id": regla_id or f"REGLA_{len(self.reglas) + 1}",
+            "condiciones": dict(condiciones),
+            "conclusion": dict(conclusion),
+        }
+        self.reglas.insert(0, nueva_regla)
+        return nueva_regla
+
     def listar_reglas(self) -> list:
         """Retorna los IDs de todas las reglas registradas."""
         return [r["id"] for r in self.reglas]

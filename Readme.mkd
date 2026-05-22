@@ -21,6 +21,18 @@ water_soul/
 python motor_inferencia.py
 ```
 
+## Cómo ejecutar la interfaz gráfica
+
+```bash
+python interfaz_tk.py
+```
+
+## Flujo agregado en la interfaz
+
+Cuando no existe una coincidencia exacta para la consulta, la pantalla muestra un botón de "Agregar conocimiento".
+Ese flujo permite registrar una nueva regla con los hechos actuales y definir el resultado, la esencia, el lugar y los textos de explicación.
+Después de guardar, la consulta se vuelve a ejecutar para mostrar el proceso y el resultado al usuario.
+
 ## Cómo usar la interfaz web
 
 Abrir `interfaz.html` en cualquier navegador. No requiere servidor.

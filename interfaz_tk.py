@@ -503,19 +503,133 @@ class WaterSoulApp(tk.Tk):
 
     def _show_no_match(self):
         self._clear_inner()
+        self.vsb.pack(side="right", fill="y")
         self._brand(self.inner)
         pad = tk.Frame(self.inner, bg=C["surface"])
         pad.pack(fill="x", padx=22, pady=20)
         tk.Label(pad, text="⚠  Sin coincidencia",
                  font=FONT_HEAD, fg=C["blue_800"],
-                 bg=C["surface"]).pack(pady=10)
+                 bg=C["surface"]).pack(pady=(10, 6))
         tk.Label(pad, text="No se encontró un perfil exacto para tu combinación.",
                  font=FONT_BODY, fg=C["text_mut"],
                  bg=C["surface"]).pack()
-        tk.Button(pad, text="Reintentar", font=FONT_BODY,
-                  fg=C["white"], bg=C["blue_400"],
+        tk.Label(pad, text="Si quieres, puedes agregar un nuevo conocimiento para esta consulta.",
+                 font=FONT_BODY, fg=C["text_sec"],
+                 bg=C["surface"], wraplength=480, justify="center").pack(pady=(8, 0))
+
+        btn_row = tk.Frame(pad, bg=C["surface"])
+        btn_row.pack(fill="x", pady=18)
+
+        tk.Button(btn_row, text="➕  Agregar conocimiento", font=FONT_BODY,
+                  fg=C["white"], bg=C["success"],
+                  activebackground="#16A34A",
                   relief="flat", bd=0, padx=14, pady=8,
-                  cursor="hand2", command=self._restart).pack(pady=16)
+                  cursor="hand2", command=self._abrir_formulario_conocimiento).pack(side="left")
+
+        tk.Button(btn_row, text="🔄  Nueva consulta", font=FONT_BODY,
+                  fg=C["white"], bg=C["blue_400"],
+                  activebackground=C["blue_600"],
+                  relief="flat", bd=0, padx=14, pady=8,
+                  cursor="hand2", command=self._restart).pack(side="right")
+
+    def _abrir_formulario_conocimiento(self):
+        ventana = tk.Toplevel(self)
+        ventana.title("Agregar conocimiento")
+        ventana.configure(bg=C["bg"])
+        ventana.geometry("620x560")
+        ventana.resizable(False, False)
+        ventana.transient(self)
+        ventana.grab_set()
+
+        marco = tk.Frame(ventana, bg=C["surface"], highlightbackground=C["border"],
+                         highlightthickness=1)
+        marco.pack(fill="both", expand=True, padx=16, pady=16)
+
+        encabezado = tk.Frame(marco, bg=C["surface"])
+        encabezado.pack(fill="x", padx=16, pady=(16, 8))
+        tk.Label(encabezado, text="Regla basada en tus respuestas actuales",
+                 font=FONT_HEAD, fg=C["blue_800"], bg=C["surface"]).pack(anchor="w")
+        tk.Label(encabezado, text=self._formatear_base_hechos(), font=FONT_SMALL,
+                 fg=C["text_mut"], bg=C["surface"], justify="left", wraplength=560).pack(anchor="w", pady=(6, 0))
+
+        body = tk.Frame(marco, bg=C["surface"])
+        body.pack(fill="both", expand=True, padx=16, pady=(0, 16))
+
+        tipo_var = tk.StringVar()
+        esencia_var = tk.StringVar()
+        lugar_var = tk.StringVar()
+
+        def campo_texto(label, variable, row):
+            tk.Label(body, text=label, font=FONT_SMALL, fg=C["blue_600"], bg=C["surface"]).grid(
+                row=row, column=0, sticky="w", pady=(0, 4)
+            )
+            entry = tk.Entry(body, textvariable=variable, font=FONT_BODY,
+                             fg=C["blue_800"], bg=C["blue_50"], relief="flat")
+            entry.grid(row=row + 1, column=0, sticky="ew", pady=(0, 10))
+            return entry
+
+        body.columnconfigure(0, weight=1)
+        campo_texto("Nombre del nuevo resultado", tipo_var, 0)
+        campo_texto("Esencia", esencia_var, 2)
+        campo_texto("Lugar", lugar_var, 4)
+
+        def campo_area(label, row):
+            tk.Label(body, text=label, font=FONT_SMALL, fg=C["blue_600"], bg=C["surface"]).grid(
+                row=row, column=0, sticky="w", pady=(0, 4)
+            )
+            text = tk.Text(body, height=4, font=FONT_BODY, fg=C["blue_800"], bg=C["blue_50"],
+                           relief="flat", bd=0, wrap="word", padx=10, pady=8)
+            text.grid(row=row + 1, column=0, sticky="ew", pady=(0, 10))
+            return text
+
+        descripcion_txt = campo_area("Descripción", 6)
+        recomendacion_txt = campo_area("Recomendación", 8)
+        dato_txt = campo_area("Dato del lugar", 10)
+
+        error_lbl = tk.Label(body, text="", font=FONT_SMALL, fg="#B91C1C", bg=C["surface"])
+        error_lbl.grid(row=12, column=0, sticky="w", pady=(0, 6))
+
+        btns = tk.Frame(body, bg=C["surface"])
+        btns.grid(row=13, column=0, sticky="e", pady=(8, 0))
+
+        def guardar():
+            tipo = tipo_var.get().strip().upper()
+            esencia = esencia_var.get().strip()
+            lugar = lugar_var.get().strip()
+            descripcion = descripcion_txt.get("1.0", "end").strip()
+            recomendacion = recomendacion_txt.get("1.0", "end").strip()
+            dato_lugar = dato_txt.get("1.0", "end").strip()
+
+            if not tipo or not esencia or not lugar:
+                error_lbl.config(text="Completa al menos nombre del resultado, esencia y lugar.")
+                return
+
+            self.base_conocim.agregar_regla(
+                self.hechos,
+                {
+                    "tipo": tipo,
+                    "esencia": esencia,
+                    "lugar": lugar,
+                },
+                regla_id=f"USUARIO_{tipo}",
+            )
+            self.mod_expl.TEXTOS[tipo] = {
+                "descripcion": descripcion,
+                "recomendacion": recomendacion,
+                "dato_lugar": dato_lugar,
+            }
+            ventana.destroy()
+            self._show_result()
+
+        tk.Button(btns, text="Cancelar", font=FONT_BODY,
+                  fg=C["blue_600"], bg=C["blue_50"],
+                  relief="flat", bd=0, padx=14, pady=8,
+                  cursor="hand2", command=ventana.destroy).pack(side="right", padx=(8, 0))
+        tk.Button(btns, text="Guardar conocimiento", font=FONT_BODY,
+                  fg=C["white"], bg=C["success"],
+                  activebackground="#16A34A",
+                  relief="flat", bd=0, padx=14, pady=8,
+                  cursor="hand2", command=guardar).pack(side="right")
 
     def _restart(self):
         self.current = 0
