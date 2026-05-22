@@ -545,15 +545,34 @@ class WaterSoulApp(tk.Tk):
                          highlightthickness=1)
         marco.pack(fill="both", expand=True, padx=16, pady=16)
 
-        encabezado = tk.Frame(marco, bg=C["surface"])
+        canvas = tk.Canvas(marco, bg=C["surface"], highlightthickness=0)
+        scroll = ttk.Scrollbar(marco, orient="vertical", command=canvas.yview)
+        canvas.configure(yscrollcommand=scroll.set)
+
+        scroll.pack(side="right", fill="y")
+        canvas.pack(side="left", fill="both", expand=True)
+
+        contenido = tk.Frame(canvas, bg=C["surface"])
+        contenedor = canvas.create_window((0, 0), window=contenido, anchor="nw")
+
+        def ajustar_scroll(event=None):
+            canvas.configure(scrollregion=canvas.bbox("all"))
+
+        def ajustar_ancho(event):
+            canvas.itemconfig(contenedor, width=event.width)
+
+        contenido.bind("<Configure>", ajustar_scroll)
+        canvas.bind("<Configure>", ajustar_ancho)
+
+        encabezado = tk.Frame(contenido, bg=C["surface"])
         encabezado.pack(fill="x", padx=16, pady=(16, 8))
         tk.Label(encabezado, text="Regla basada en tus respuestas actuales",
                  font=FONT_HEAD, fg=C["blue_800"], bg=C["surface"]).pack(anchor="w")
         tk.Label(encabezado, text=self._formatear_base_hechos(), font=FONT_SMALL,
-                 fg=C["text_mut"], bg=C["surface"], justify="left", wraplength=560).pack(anchor="w", pady=(6, 0))
+                 fg=C["text_mut"], bg=C["surface"], justify="left", wraplength=520).pack(anchor="w", pady=(6, 0))
 
-        body = tk.Frame(marco, bg=C["surface"])
-        body.pack(fill="both", expand=True, padx=16, pady=(0, 16))
+        body = tk.Frame(contenido, bg=C["surface"])
+        body.pack(fill="both", expand=True, padx=16, pady=(0, 8))
 
         tipo_var = tk.StringVar()
         esencia_var = tk.StringVar()
@@ -589,8 +608,11 @@ class WaterSoulApp(tk.Tk):
         error_lbl = tk.Label(body, text="", font=FONT_SMALL, fg="#B91C1C", bg=C["surface"])
         error_lbl.grid(row=12, column=0, sticky="w", pady=(0, 6))
 
-        btns = tk.Frame(body, bg=C["surface"])
-        btns.grid(row=13, column=0, sticky="e", pady=(8, 0))
+        footer = tk.Frame(marco, bg=C["surface"])
+        footer.pack(fill="x", side="bottom", padx=16, pady=(0, 16))
+
+        btns = tk.Frame(footer, bg=C["surface"])
+        btns.pack(anchor="center")
 
         def guardar():
             tipo = tipo_var.get().strip().upper()
@@ -600,9 +622,11 @@ class WaterSoulApp(tk.Tk):
             recomendacion = recomendacion_txt.get("1.0", "end").strip()
             dato_lugar = dato_txt.get("1.0", "end").strip()
 
-            if not tipo or not esencia or not lugar:
-                error_lbl.config(text="Completa al menos nombre del resultado, esencia y lugar.")
+            if not all([tipo, esencia, lugar, descripcion, recomendacion, dato_lugar]):
+                error_lbl.config(text="Completa todos los campos antes de agregar el conocimiento.")
                 return
+
+            error_lbl.config(text="")
 
             self.base_conocim.agregar_regla(
                 self.hechos,
@@ -621,15 +645,13 @@ class WaterSoulApp(tk.Tk):
             ventana.destroy()
             self._show_result()
 
-        tk.Button(btns, text="Cancelar", font=FONT_BODY,
-                  fg=C["blue_600"], bg=C["blue_50"],
-                  relief="flat", bd=0, padx=14, pady=8,
-                  cursor="hand2", command=ventana.destroy).pack(side="right", padx=(8, 0))
-        tk.Button(btns, text="Guardar conocimiento", font=FONT_BODY,
+        tk.Button(btns, text="Agregar conocimiento", font=FONT_BODY,
                   fg=C["white"], bg=C["success"],
                   activebackground="#16A34A",
                   relief="flat", bd=0, padx=14, pady=8,
-                  cursor="hand2", command=guardar).pack(side="right")
+                  cursor="hand2", command=guardar).pack()
+
+        canvas.yview_moveto(0)
 
     def _restart(self):
         self.current = 0
