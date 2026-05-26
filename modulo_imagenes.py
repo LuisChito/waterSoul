@@ -8,6 +8,8 @@
 # ============================================================
 
 import os
+import io
+import urllib.request
 from PIL import Image, ImageTk, ImageDraw
 
 # Ruta base de imágenes locales (relativa a este archivo)
@@ -61,21 +63,32 @@ def _recortar_centrado(img: Image.Image, ancho: int, alto: int) -> Image.Image:
     return img.crop((left, top, left + ancho, top + alto))
 
 
-def obtener_imagen_tk(tipo: str, ancho: int = 480, alto: int = 220) -> ImageTk.PhotoImage:
+def obtener_imagen_tk(tipo: str, ancho: int = 480, alto: int = 220, url: str | None = None) -> ImageTk.PhotoImage:
     """
     Retorna un PhotoImage listo para usar en tkinter.
     Prioridad: imagen local → gradiente de respaldo.
     """
-    key = (tipo, ancho, alto)
+    key = (tipo, ancho, alto, url)
     if key in _cache:
         return _cache[key]
+    img = None
 
-    ruta = IMAGENES_LOCAL.get(tipo)
-    img  = None
+    # 1) Si se proporciona una URL, intentar descargarla
+    if url and isinstance(url, str) and url.lower().startswith("http"):
+        try:
+            with urllib.request.urlopen(url, timeout=8) as resp:
+                data = resp.read()
+            img = Image.open(io.BytesIO(data)).convert("RGB")
+        except Exception:
+            img = None
 
-    if ruta and os.path.exists(ruta):
-        img = Image.open(ruta).convert("RGB")
+    # 2) Si no hay imagen remota, buscar imagen local por tipo
+    if img is None:
+        ruta = IMAGENES_LOCAL.get(tipo)
+        if ruta and os.path.exists(ruta):
+            img = Image.open(ruta).convert("RGB")
 
+    # 3) Si no hay ninguna imagen, crear gradiente de respaldo
     if img is None:
         c1, c2 = COLORES_RESPALDO.get(tipo, ("#378ADD", "#0C447C"))
         img = _crear_gradiente(c1, c2, ancho, alto)

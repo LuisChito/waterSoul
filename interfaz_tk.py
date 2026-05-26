@@ -338,7 +338,7 @@ class WaterSoulApp(tk.Tk):
             return
 
         self._clear_inner()
-        self.vsb.pack(side="right", fill="y")
+        self.vsb.pack_forget()
 
         conc  = regla["conclusion"]
         tipo  = conc["tipo"]
@@ -349,21 +349,18 @@ class WaterSoulApp(tk.Tk):
         pad = tk.Frame(self.inner, bg=C["surface"])
         pad.pack(fill="x", padx=22)
 
-        # Chip "Análisis completado"
-        chip(pad, "✓  Análisis completado",
-             fg=C["success"], bg="#F0FDF4").pack(anchor="w", pady=(0, 6))
+        # 1) Resultado
+        resultado_principal = (
+            conc.get("respuesta", "").strip()
+            or conc.get("esencia", "").strip()
+            or conc.get("tipo", "").strip()
+        )
+        tk.Label(pad, text=f"Resultado: {resultado_principal}", font=("Segoe UI", 24, "bold"),
+                 fg=C["blue_800"], bg=C["surface"]).pack(anchor="w", pady=(0, 2))
+        tk.Label(pad, text=f"Tipo: {conc.get('tipo', '')}", font=FONT_BODY,
+                 fg=C["blue_400"], bg=C["surface"]).pack(anchor="w", pady=(0, 12))
 
-        # Título  ─ "Eres la LAGUNA"
-        eres_row = tk.Frame(pad, bg=C["surface"])
-        eres_row.pack(anchor="w", pady=(0, 2))
-        tk.Label(eres_row, text="Eres la ", font=("Segoe UI", 22),
-                 fg=C["blue_600"], bg=C["surface"]).pack(side="left")
-        tk.Label(eres_row, text=conc["tipo"], font=("Segoe UI", 26, "bold"),
-                 fg=C["blue_800"], bg=C["surface"]).pack(side="left")
-        tk.Label(pad, text=f"Tu esencia: {conc['esencia']}", font=FONT_BODY,
-                 fg=C["blue_400"], bg=C["surface"]).pack(anchor="w", pady=(0, 10))
-
-        # ── FOTO DEL LUGAR ───────────────────────────────────
+        # 2) Imagen
         img_frame = tk.Frame(pad, bg=C["blue_400"],
                              highlightbackground=C["border"],
                              highlightthickness=1)
@@ -375,7 +372,7 @@ class WaterSoulApp(tk.Tk):
         self._loading_lbl.pack()
 
         def load_img():
-            photo = obtener_imagen_tk(tipo, ancho=516, alto=210)
+            photo = obtener_imagen_tk(tipo, ancho=516, alto=210, url=conc.get("imagen"))
             def update():
                 self._loading_lbl.destroy()
                 img_lbl = tk.Label(img_frame, image=photo, bg=C["blue_400"])
@@ -385,59 +382,60 @@ class WaterSoulApp(tk.Tk):
 
         threading.Thread(target=load_img, daemon=True).start()
 
-        # Chip lugar
-        chip(pad, f"📍  {conc['lugar']}").pack(anchor="w", pady=(4, 2))
+        # 3) Botón para mostrar explicación (oculta por defecto)
+        bloques = []
+        explicacion_arbol = conc.get("explicacion", "").strip()
+        descripcion = textos.get("descripcion", "").strip()
+        recomendacion = textos.get("recomendacion", "").strip()
 
-        divider(pad)
+        # Priorizar la explicación real proveniente del árbol JSON.
+        if explicacion_arbol:
+            bloques.append(f"Explicacion:\n{explicacion_arbol}")
 
-        # Dato del lugar
-        section_label(pad, "Sobre el lugar")
-        _text_box(pad, textos.get("dato_lugar", ""))
+        if descripcion:
+            bloques.append(f"Descripcion:\n{descripcion}")
+        if recomendacion:
+            bloques.append(f"Recomendacion:\n{recomendacion}")
 
-        divider(pad)
+        explicacion_txt = "\n\n".join(bloques)
+        if not explicacion_txt:
+            explicacion_txt = "Sin explicacion disponible para este resultado."
 
-        # Descripción
-        section_label(pad, "Descripción")
-        _text_box(pad, textos.get("descripcion", ""))
+        exp_wrap = tk.Frame(pad, bg=C["surface"])
+        exp_wrap.pack(fill="x", pady=(4, 0))
 
-        divider(pad)
+        exp_box_container = tk.Frame(exp_wrap, bg=C["surface"])
+        exp_box = _text_box(exp_box_container, explicacion_txt)
 
-        # Recomendación
-        section_label(pad, "Recomendación")
-        _text_box(pad, textos.get("recomendacion", ""))
+        showing = False
 
-        # Botones
-        btn_row = tk.Frame(self.inner, bg=C["surface"])
-        btn_row.pack(fill="x", padx=22, pady=16)
+        def toggle_explicacion():
+            nonlocal showing
+            if showing:
+                exp_box_container.pack_forget()
+                btn_exp.config(text="Ver explicacion")
+                self.vsb.pack_forget()
+                showing = False
+            else:
+                exp_box_container.pack(fill="x", pady=(10, 0), before=btn_restart)
+                self.vsb.pack(side="right", fill="y")
+                self._on_inner_configure(None)
+                btn_exp.config(text="Ocultar explicacion")
+                showing = True
 
-        btn_info = tk.Frame(btn_row, bg=C["surface"])
-        btn_info.pack(side="left")
+        btn_exp = tk.Button(exp_wrap, text="Ver explicacion", font=FONT_BODY,
+                            fg=C["white"], bg=C["blue_400"],
+                            activebackground=C["blue_600"],
+                            relief="flat", bd=0, padx=16, pady=8,
+                            cursor="hand2", command=toggle_explicacion)
+        btn_exp.pack(anchor="w")
 
-        tk.Button(btn_info, text="📄  Base de hechos", font=FONT_BODY,
-                  fg=C["blue_600"], bg=C["blue_50"],
-                  activebackground=C["border"],
-                  relief="flat", bd=0, padx=14, pady=8,
-                  cursor="hand2",
-                  command=lambda: self._mostrar_detalle(
-                      "Base de hechos",
-                      self._formatear_base_hechos(),
-                  )).pack(side="left", padx=(0, 8))
-
-        tk.Button(btn_info, text="🧠  Base de conocimientos", font=FONT_BODY,
-                  fg=C["blue_600"], bg=C["blue_50"],
-                  activebackground=C["border"],
-                  relief="flat", bd=0, padx=14, pady=8,
-                  cursor="hand2",
-                  command=lambda: self._mostrar_detalle(
-                      "Base de conocimientos",
-                      self._formatear_base_conocimientos(regla),
-                  )).pack(side="left")
-
-        tk.Button(btn_row, text="🔄  Nueva consulta", font=FONT_BODY,
-                  fg=C["white"], bg=C["blue_400"],
-                  activebackground=C["blue_600"],
-                  relief="flat", bd=0, padx=16, pady=8,
-                  cursor="hand2", command=self._restart).pack(side="right")
+        btn_restart = tk.Button(exp_wrap, text="Hacer otra consulta", font=FONT_BODY,
+                                fg=C["white"], bg=C["blue_400"],
+                                activebackground=C["blue_600"],
+                                relief="flat", bd=0, padx=16, pady=8,
+                                cursor="hand2", command=self._restart)
+        btn_restart.pack(anchor="w", pady=(8, 0))
 
     def _mostrar_detalle(self, titulo, contenido):
         ventana = tk.Toplevel(self)

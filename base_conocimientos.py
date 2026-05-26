@@ -10,6 +10,7 @@
 import copy
 import json
 import os
+import hashlib
 
 
 class BaseDeConocimientos:
@@ -143,6 +144,44 @@ class BaseDeConocimientos:
         for regla in self.reglas:
             if regla["condiciones"] == hechos_dict:
                 return regla
+
+        # Si no hay una regla exacta en la base clásica, intentar buscar
+        # en la nueva estructura `arbol` del JSON (si existe). El árbol
+        # contiene categorías (ej. 'lago','mar','rio','nube') con varias
+        # `opciones` (lugares). Seleccionamos una opción determinísticamente
+        # a partir de las respuestas del usuario para que la elección sea
+        # reproducible entre ejecuciones.
+        arbol = self._datos.get("arbol")
+        if isinstance(arbol, list):
+            reaccion = hechos_dict.get("reaccion")
+            if reaccion:
+                for nodo in arbol:
+                    if nodo.get("id") == reaccion:
+                        opciones = nodo.get("opciones", [])
+                        if opciones:
+                            # Índice determinista basado en los hechos.
+                            # Usamos SHA-256 sobre la concatenación de valores
+                            # para que la selección sea reproducible entre
+                            # ejecuciones (a diferencia de built-in hash()).
+                            key_str = "|".join([
+                                hechos_dict.get("reaccion", ""),
+                                hechos_dict.get("entorno", ""),
+                                hechos_dict.get("percepcion", ""),
+                                hechos_dict.get("estilo", ""),
+                            ])
+                            digest = hashlib.sha256(key_str.encode("utf-8")).hexdigest()
+                            idx = int(digest[:16], 16) % len(opciones)
+                            opt = opciones[idx]
+                            conclusion = {
+                                "tipo": reaccion.upper(),
+                                "respuesta": opt.get("respuesta", ""),
+                                "esencia": opt.get("respuesta", ""),
+                                "lugar": opt.get("respuesta", ""),
+                                "imagen": opt.get("imagen", ""),
+                                "explicacion": opt.get("explicacion", ""),
+                            }
+                            return {"id": f"ARBO_{reaccion}_{idx}", "conclusion": conclusion}
+
         return None
 
     def agregar_regla(self, condiciones: dict, conclusion: dict, regla_id: str | None = None, textos: dict | None = None) -> dict:
