@@ -19,6 +19,9 @@ class ModuloExplicacion:
     # ----------------------------------------------------------
     # Textos narrativos por tipo de alma (uno por rama)
     # ----------------------------------------------------------
+    # Contenedor de textos que será actualizado desde la base
+    # de conocimientos al inicializar la aplicación.
+    TEXTOS: dict = {}
    
     # ----------------------------------------------------------
     # Métodos de presentación
