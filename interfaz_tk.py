@@ -417,7 +417,7 @@ class WaterSoulApp(tk.Tk):
                 self.vsb.pack_forget()
                 showing = False
             else:
-                exp_box_container.pack(fill="x", pady=(10, 0), before=btn_restart)
+                exp_box_container.pack(fill="x", pady=(10, 0))
                 self.vsb.pack(side="right", fill="y")
                 self._on_inner_configure(None)
                 btn_exp.config(text="Ocultar explicacion")
@@ -430,12 +430,14 @@ class WaterSoulApp(tk.Tk):
                             cursor="hand2", command=toggle_explicacion)
         btn_exp.pack(anchor="w")
 
-        btn_restart = tk.Button(exp_wrap, text="Hacer otra consulta", font=FONT_BODY,
-                                fg=C["white"], bg=C["blue_400"],
-                                activebackground=C["blue_600"],
-                                relief="flat", bd=0, padx=16, pady=8,
-                                cursor="hand2", command=self._restart)
-        btn_restart.pack(anchor="w", pady=(8, 0))
+        footer = tk.Frame(pad, bg=C["surface"])
+        footer.pack(fill="x", side="bottom", pady=(10, 0))
+
+        tk.Button(footer, text="↻  Nueva consulta", font=FONT_BODY,
+              fg=C["white"], bg=C["blue_400"],
+              activebackground=C["blue_600"],
+              relief="flat", bd=0, padx=16, pady=8,
+              cursor="hand2", command=self._restart).pack(side="right")
 
     def _mostrar_detalle(self, titulo, contenido):
         ventana = tk.Toplevel(self)
@@ -501,35 +503,7 @@ class WaterSoulApp(tk.Tk):
         return "\n".join(lineas).strip()
 
     def _show_no_match(self):
-        self._clear_inner()
-        self.vsb.pack(side="right", fill="y")
-        self._brand(self.inner)
-        pad = tk.Frame(self.inner, bg=C["surface"])
-        pad.pack(fill="x", padx=22, pady=20)
-        tk.Label(pad, text="⚠  Sin coincidencia",
-                 font=FONT_HEAD, fg=C["blue_800"],
-                 bg=C["surface"]).pack(pady=(10, 6))
-        tk.Label(pad, text="No se encontró un perfil exacto para tu combinación.",
-                 font=FONT_BODY, fg=C["text_mut"],
-                 bg=C["surface"]).pack()
-        tk.Label(pad, text="Si quieres, puedes agregar un nuevo conocimiento para esta consulta.",
-                 font=FONT_BODY, fg=C["text_sec"],
-                 bg=C["surface"], wraplength=480, justify="center").pack(pady=(8, 0))
-
-        btn_row = tk.Frame(pad, bg=C["surface"])
-        btn_row.pack(fill="x", pady=18)
-
-        tk.Button(btn_row, text="➕  Agregar conocimiento", font=FONT_BODY,
-                  fg=C["white"], bg=C["success"],
-                  activebackground="#16A34A",
-                  relief="flat", bd=0, padx=14, pady=8,
-                  cursor="hand2", command=self._abrir_formulario_conocimiento).pack(side="left")
-
-        tk.Button(btn_row, text="🔄  Nueva consulta", font=FONT_BODY,
-                  fg=C["white"], bg=C["blue_400"],
-                  activebackground=C["blue_600"],
-                  relief="flat", bd=0, padx=14, pady=8,
-                  cursor="hand2", command=self._restart).pack(side="right")
+        self._abrir_formulario_conocimiento()
 
     def _abrir_formulario_conocimiento(self):
         ventana = tk.Toplevel(self)
@@ -569,6 +543,12 @@ class WaterSoulApp(tk.Tk):
                  font=FONT_HEAD, fg=C["blue_800"], bg=C["surface"]).pack(anchor="w")
         tk.Label(encabezado, text=self._formatear_base_hechos(), font=FONT_SMALL,
                  fg=C["text_mut"], bg=C["surface"], justify="left", wraplength=520).pack(anchor="w", pady=(6, 0))
+
+        ruta = self.base_conocim.obtener_ultima_ruta()
+        if ruta:
+            tk.Label(encabezado, text="Ruta seleccionada: " + " > ".join(ruta),
+                     font=FONT_SMALL, fg=C["blue_600"], bg=C["surface"],
+                     justify="left", wraplength=520).pack(anchor="w", pady=(6, 0))
 
         body = tk.Frame(contenido, bg=C["surface"])
         body.pack(fill="both", expand=True, padx=16, pady=(0, 8))
@@ -640,6 +620,7 @@ class WaterSoulApp(tk.Tk):
                     "recomendacion": recomendacion,
                     "dato_lugar": dato_lugar,
                 },
+                ruta=self.base_conocim.obtener_ultima_ruta(),
             )
             self.mod_expl.TEXTOS.update(self.base_conocim.obtener_textos())
             ventana.destroy()

@@ -32,6 +32,7 @@ class BaseDeConocimientos:
         self._datos = self._cargar_datos()
         self.reglas = self._datos.get("reglas", copy.deepcopy(self._reglas_predeterminadas()))
         self.textos = self._datos.get("textos", {})
+        self.ultima_ruta = []
 
     def _reglas_predeterminadas(self) -> list:
         return [
@@ -143,6 +144,7 @@ class BaseDeConocimientos:
         """
         for regla in self.reglas:
             if regla["condiciones"] == hechos_dict:
+                self.ultima_ruta = [hechos_dict.get("reaccion", ""), hechos_dict.get("entorno", ""), hechos_dict.get("percepcion", ""), hechos_dict.get("estilo", "")]
                 return regla
 
         # Si no hay una regla exacta en la base clásica, intentar buscar
@@ -159,10 +161,9 @@ class BaseDeConocimientos:
                     if nodo.get("id") == reaccion:
                         opciones = nodo.get("opciones", [])
                         if opciones:
-                            # Índice determinista basado en los hechos.
-                            # Usamos SHA-256 sobre la concatenación de valores
-                            # para que la selección sea reproducible entre
-                            # ejecuciones (a diferencia de built-in hash()).
+                            # Selección determinista por id de opción.
+                            # Si el id esperado no existe en el JSON, se
+                            # considera ausencia de conocimiento y se retorna None.
                             key_str = "|".join([
                                 hechos_dict.get("reaccion", ""),
                                 hechos_dict.get("entorno", ""),
@@ -170,8 +171,20 @@ class BaseDeConocimientos:
                                 hechos_dict.get("estilo", ""),
                             ])
                             digest = hashlib.sha256(key_str.encode("utf-8")).hexdigest()
-                            idx = int(digest[:16], 16) % len(opciones)
-                            opt = opciones[idx]
+                            slot = (int(digest[:16], 16) % 36) + 1
+                            opt_id = f"op{slot}"
+                            self.ultima_ruta = [
+                                hechos_dict.get("reaccion", ""),
+                                hechos_dict.get("entorno", ""),
+                                hechos_dict.get("percepcion", ""),
+                                hechos_dict.get("estilo", ""),
+                                opt_id,
+                            ]
+
+                            opt = next((opcion for opcion in opciones if opcion.get("id") == opt_id), None)
+                            if opt is None:
+                                return None
+
                             conclusion = {
                                 "tipo": reaccion.upper(),
                                 "respuesta": opt.get("respuesta", ""),
@@ -179,12 +192,13 @@ class BaseDeConocimientos:
                                 "lugar": opt.get("respuesta", ""),
                                 "imagen": opt.get("imagen", ""),
                                 "explicacion": opt.get("explicacion", ""),
+                                "ruta": " > ".join([str(p) for p in self.ultima_ruta if p]),
                             }
-                            return {"id": f"ARBO_{reaccion}_{idx}", "conclusion": conclusion}
+                            return {"id": f"ARBO_{reaccion}_{slot}", "conclusion": conclusion}
 
         return None
 
-    def agregar_regla(self, condiciones: dict, conclusion: dict, regla_id: str | None = None, textos: dict | None = None) -> dict:
+    def agregar_regla(self, condiciones: dict, conclusion: dict, regla_id: str | None = None, textos: dict | None = None, ruta: list | None = None) -> dict:
         """
         Agrega una regla nueva al árbol de conocimiento persistente.
 
@@ -196,6 +210,8 @@ class BaseDeConocimientos:
             "condiciones": dict(condiciones),
             "conclusion": dict(conclusion),
         }
+        if ruta:
+            nueva_regla["ruta"] = list(ruta)
         self.reglas.insert(0, nueva_regla)
         if textos:
             tipo = conclusion.get("tipo")
@@ -207,6 +223,10 @@ class BaseDeConocimientos:
     def obtener_textos(self) -> dict:
         """Retorna una copia de los textos persistidos por tipo."""
         return copy.deepcopy(self.textos)
+
+    def obtener_ultima_ruta(self) -> list:
+        """Retorna la ultima ruta calculada por el buscador."""
+        return list(self.ultima_ruta)
 
     def listar_reglas(self) -> list:
         """Retorna los IDs de todas las reglas registradas."""
