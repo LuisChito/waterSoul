@@ -3,161 +3,861 @@
     {
       "id": "lago",
       "opciones": [
-        { "id": "op2", "respuesta": "Lago Titicaca", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Titicaca_(4094294277).jpg", "explicacion": "El lago comercialmente navegable más alto del mundo." },
-        { "id": "op3", "respuesta": "Lago Baikal", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Panorama_of_lake_Baikal.jpg", "explicacion": "El lago de agua dulce más profundo y voluminoso del mundo." },
-        { "id": "op4", "respuesta": "Lago Victoria", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Victoria-_Tanzania.jpg", "explicacion": "El lago de agua dulce más grande de África." },
-        { "id": "op5", "respuesta": "Mar Muerto", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Dead_Sea_(11664067813).jpg", "explicacion": "Lago hipersalino a 427 metros bajo el nivel del mar." },
-        { "id": "op6", "respuesta": "Embalse El Granero", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/El_Granero_Dam.jpg", "explicacion": "Presa de terraplén en el Río Conchos, México.[2]" },
-        { "id": "op7", "respuesta": "Lago Colina", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lago_Colina.jpg", "explicacion": "Presa de gravedad ubicada en Chihuahua.[3]" },
-        { "id": "op8", "respuesta": "Lago Toronto", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/La_Boquilla_Dam.jpg", "explicacion": "Embalse creado por la masiva Presa de la Boquilla.[4]" },
-        { "id": "op9", "respuesta": "Laguna de Bacalar", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Laguna_de_Bacalar.JPG", "explicacion": "Cuerpo de agua léntico kárstico en Quintana Roo.[5]" },
-        { "id": "op10", "respuesta": "Lago Superior", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Superior.jpg", "explicacion": "El mayor de los Grandes Lagos de Norteamérica." },
-        { "id": "op11", "respuesta": "Lago Huron", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Huron.jpg", "explicacion": "Uno de los Grandes Lagos masivos compartidos por EE. UU. y Canadá." },
-        { "id": "op12", "respuesta": "Gran Lago del Oso", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Great_Bear_Lake.jpg", "explicacion": "El lago más grande ubicado completamente dentro de Canadá." },
-        { "id": "op13", "respuesta": "Gran Lago del Esclavo", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Great_Slave_Lake.jpg", "explicacion": "Lago sumamente profundo en los Territorios del Noroeste." },
-        { "id": "op14", "respuesta": "Lago Erie", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Erie.jpg", "explicacion": "Lago norteamericano parte del sistema de Grandes Lagos." },
-        { "id": "op15", "respuesta": "Lago Winnipeg", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Winnipeg.jpg", "explicacion": "Gran lago natural situado en la provincia de Manitoba." },
-        { "id": "op16", "respuesta": "Lago Ontario", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Ontario.jpg", "explicacion": "El menor y más oriental de los Grandes Lagos." },
-        { "id": "op17", "respuesta": "Lake of the Woods", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_of_the_Woods.jpg", "explicacion": "Cuerpo lacustre ubicado en la frontera entre Canadá y EE. UU." },
-        { "id": "op18", "respuesta": "Embalse Caniapiscau", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Caniapiscau_Reservoir.jpg", "explicacion": "Masivo reservorio hidroeléctrico en Quebec." },
-        { "id": "op19", "respuesta": "Lago Dubawnt", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Dubawnt_Lake.jpg", "explicacion": "Lago subártico extenso en el territorio de Nunavut." },
-        { "id": "op20", "respuesta": "Lago Kasba", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Kasba_Lake.jpg", "explicacion": "Lago canadiense en la frontera de Nunavut y Territorios del Noroeste." },
-        { "id": "op21", "respuesta": "Lago Champlain", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Champlain.jpg", "explicacion": "Lago de agua dulce en la frontera entre Nueva York y Quebec." },
-        { "id": "op22", "respuesta": "Lago St. Clair", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_St_Clair.jpg", "explicacion": "Lago situado entre la provincia de Ontario y Míchigan." },
-        { "id": "op23", "respuesta": "Lago Aberdeen", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Aberdeen_Lake.jpg", "explicacion": "Lago canadiense de importancia en Nunavut." },
-        { "id": "op24", "respuesta": "Lago Claire", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Claire.jpg", "explicacion": "Extenso lago situado en la provincia de Alberta." },
-        { "id": "op25", "respuesta": "Lesser Slave Lake", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lesser_Slave_Lake.jpg", "explicacion": "Cuerpo de agua dulce localizado en Alberta central." },
-        { "id": "op26", "respuesta": "Embalse Nechako", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Nechako_Reservoir.jpg", "explicacion": "Estructura hidroeléctrica en Columbia Británica." },
-        { "id": "op27", "respuesta": "Lago Babine", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Babine_Lake.jpg", "explicacion": "El lago natural más largo de Columbia Británica." },
-        { "id": "op28", "respuesta": "Lago Kootenay", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Kootenay_Lake.jpg", "explicacion": "Largo y estrecho lago natural de Columbia Británica." },
-        { "id": "op29", "respuesta": "Lago Winnipegosis", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Winnipegosis.jpg", "explicacion": "Cuerpo de agua prehistórico remanente en Manitoba." },
-        { "id": "op30", "respuesta": "Lago Granville", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Granville_Lake.jpg", "explicacion": "Lago del norte de Manitoba que alimenta el río Churchill." },
-        { "id": "op31", "respuesta": "Lago Sipiwesk", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Sipiwesk_Lake.jpg", "explicacion": "Lago parte de la cuenca del río Nelson en Canadá." },
-        { "id": "op32", "respuesta": "Lago Oxford", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Oxford_Lake.jpg", "explicacion": "Importante lago en el curso del río Hayes en Manitoba." },
-        { "id": "op33", "respuesta": "Embalse Smallwood", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Smallwood_Reservoir.jpg", "explicacion": "Inmenso cuerpo hídrico regulado en Terranova y Labrador." },
-        { "id": "op34", "respuesta": "Lago Melville", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Melville.jpg", "explicacion": "Extensión estuarina de agua salobre en Labrador." },
-        { "id": "op35", "respuesta": "Lago Ashuanipi", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Ashuanipi_Lake.jpg", "explicacion": "Lago en la península del Labrador oriental." },
-        { "id": "op36", "respuesta": "Lago Awing", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Awing_2.jpg", "explicacion": "Impresionante lago de cráter volcánico situado en Camerún." }
+        {
+          "id": "op2",
+          "respuesta": "Lago Titicaca",
+          "imagen": "/imgs/lago/1.jpg",
+          "explicacion": "El lago comercialmente navegable más alto del mundo."
+        },
+        {
+          "id": "op3",
+          "respuesta": "Lago Baikal",
+          "imagen": "/imgs/lago/2.jpg",
+          "explicacion": "El lago de agua dulce más profundo y voluminoso del mundo."
+        },
+        {
+          "id": "op4",
+          "respuesta": "Lago Victoria",
+          "imagen": "/imgs/lago/3.jpg",
+          "explicacion": "El lago de agua dulce más grande de África."
+        },
+        {
+          "id": "op5",
+          "respuesta": "Mar Muerto",
+          "imagen": "/imgs/lago/4.jpg",
+          "explicacion": "Lago hipersalino a 427 metros bajo el nivel del mar."
+        },
+        {
+          "id": "op6",
+          "respuesta": "Embalse El Granero",
+          "imagen": "/imgs/lago/5.jpg",
+          "explicacion": "Presa de terraplén en el Río Conchos, México."
+        },
+        {
+          "id": "op7",
+          "respuesta": "Lago Colina",
+          "imagen": "/imgs/lago/6.jpg",
+          "explicacion": "Presa de gravedad ubicada en Chihuahua."
+        },
+        {
+          "id": "op8",
+          "respuesta": "Lago Toronto",
+          "imagen": "/imgs/lago/7.jpg",
+          "explicacion": "Embalse creado por la masiva Presa de la Boquilla."
+        },
+        {
+          "id": "op9",
+          "respuesta": "Laguna de Bacalar",
+          "imagen": "/imgs/lago/8.jpg",
+          "explicacion": "Cuerpo de agua léntico kárstico en Quintana Roo."
+        },
+        {
+          "id": "op10",
+          "respuesta": "Lago Superior",
+          "imagen": "/imgs/lago/9.jpg",
+          "explicacion": "El mayor de los Grandes Lagos de Norteamérica."
+        },
+        {
+          "id": "op11",
+          "respuesta": "Lago Huron",
+          "imagen": "/imgs/lago/10.jpg",
+          "explicacion": "Uno de los Grandes Lagos masivos compartidos por EE. UU. y Canadá."
+        },
+        {
+          "id": "op12",
+          "respuesta": "Gran Lago del Oso",
+          "imagen": "/imgs/lago/11.jpg",
+          "explicacion": "El lago más grande ubicado completamente dentro de Canadá."
+        },
+        {
+          "id": "op13",
+          "respuesta": "Gran Lago del Esclavo",
+          "imagen": "/imgs/lago/12.jpg",
+          "explicacion": "Lago sumamente profundo en los Territorios del Noroeste."
+        },
+        {
+          "id": "op14",
+          "respuesta": "Lago Erie",
+          "imagen": "/imgs/lago/13.jpg",
+          "explicacion": "Lago norteamericano parte del sistema de Grandes Lagos."
+        },
+        {
+          "id": "op15",
+          "respuesta": "Lago Winnipeg",
+          "imagen": "/imgs/lago/14.jpg",
+          "explicacion": "Gran lago natural situado en la provincia de Manitoba."
+        },
+        {
+          "id": "op16",
+          "respuesta": "Lago Ontario",
+          "imagen": "/imgs/lago/15.jpg",
+          "explicacion": "El menor y más oriental de los Grandes Lagos."
+        },
+        {
+          "id": "op17",
+          "respuesta": "Lake of the Woods",
+          "imagen": "/imgs/lago/16.jpg",
+          "explicacion": "Cuerpo lacustre ubicado en la frontera entre Canadá y EE. UU."
+        },
+        {
+          "id": "op18",
+          "respuesta": "Embalse Caniapiscau",
+          "imagen": "/imgs/lago/17.jpg",
+          "explicacion": "Masivo reservorio hidroeléctrico en Quebec."
+        },
+        {
+          "id": "op19",
+          "respuesta": "Lago Dubawnt",
+          "imagen": "/imgs/lago/18.jpg",
+          "explicacion": "Lago subártico extenso en el territorio de Nunavut."
+        },
+        {
+          "id": "op20",
+          "respuesta": "Lago Kasba",
+          "imagen": "/imgs/lago/19.jpg",
+          "explicacion": "Lago canadiense en la frontera de Nunavut y Territorios del Noroeste."
+        },
+        {
+          "id": "op21",
+          "respuesta": "Lago Champlain",
+          "imagen": "/imgs/lago/20.jpg",
+          "explicacion": "Lago de agua dulce en la frontera entre Nueva York y Quebec."
+        },
+        {
+          "id": "op22",
+          "respuesta": "Lago St. Clair",
+          "imagen": "/imgs/lago/21.jpg",
+          "explicacion": "Lago situado entre la provincia de Ontario y Míchigan."
+        },
+        {
+          "id": "op23",
+          "respuesta": "Lago Aberdeen",
+          "imagen": "/imgs/lago/22.jpg",
+          "explicacion": "Lago canadiense de importancia en Nunavut."
+        },
+        {
+          "id": "op24",
+          "respuesta": "Lago Claire",
+          "imagen": "/imgs/lago/23.jpg",
+          "explicacion": "Extenso lago situado en la provincia de Alberta."
+        },
+        {
+          "id": "op25",
+          "respuesta": "Lesser Slave Lake",
+          "imagen": "/imgs/lago/24.jpg",
+          "explicacion": "Cuerpo de agua dulce localizado en Alberta central."
+        },
+        {
+          "id": "op26",
+          "respuesta": "Embalse Nechako",
+          "imagen": "/imgs/lago/25.jpg",
+          "explicacion": "Estructura hidroeléctrica en Columbia Británica."
+        },
+        {
+          "id": "op27",
+          "respuesta": "Lago Babine",
+          "imagen": "/imgs/lago/26.jpg",
+          "explicacion": "El lago natural más largo de Columbia Británica."
+        },
+        {
+          "id": "op28",
+          "respuesta": "Lago Kootenay",
+          "imagen": "/imgs/lago/27.jpg",
+          "explicacion": "Largo y estrecho lago natural de Columbia Británica."
+        },
+        {
+          "id": "op29",
+          "respuesta": "Lago Winnipegosis",
+          "imagen": "/imgs/lago/28.jpg",
+          "explicacion": "Cuerpo de agua prehistórico remanente en Manitoba."
+        },
+        {
+          "id": "op30",
+          "respuesta": "Lago Granville",
+          "imagen": "/imgs/lago/29.jpg",
+          "explicacion": "Lago del norte de Manitoba que alimenta el río Churchill."
+        },
+        {
+          "id": "op31",
+          "respuesta": "Lago Sipiwesk",
+          "imagen": "/imgs/lago/30.jpg",
+          "explicacion": "Lago parte de la cuenca del río Nelson en Canadá."
+        },
+        {
+          "id": "op32",
+          "respuesta": "Lago Oxford",
+          "imagen": "/imgs/lago/31.jpg",
+          "explicacion": "Importante lago en el curso del río Hayes en Manitoba."
+        },
+        {
+          "id": "op33",
+          "respuesta": "Embalse Smallwood",
+          "imagen": "/imgs/lago/32.jpg",
+          "explicacion": "Inmenso cuerpo hídrico regulado en Terranova y Labrador."
+        },
+        {
+          "id": "op34",
+          "respuesta": "Lago Melville",
+          "imagen": "/imgs/lago/33.jpg",
+          "explicacion": "Extensión estuarina de agua salobre en Labrador."
+        },
+        {
+          "id": "op35",
+          "respuesta": "Lago Ashuanipi",
+          "imagen": "/imgs/lago/34.jpg",
+          "explicacion": "Lago en la península del Labrador oriental."
+        },
+        {
+          "id": "op36",
+          "respuesta": "Lago Awing",
+          "imagen": "/imgs/lago/35.jpg",
+          "explicacion": "Impresionante lago de cráter volcánico situado en Camerún."
+        }
       ]
     },
     {
       "id": "mar",
       "opciones": [
-        { "id": "op2", "respuesta": "Mar Rojo", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Red_sea_coral_reef.jpg", "explicacion": "Conectado al mar Mediterráneo a través del Canal de Suez." },
-        { "id": "op3", "respuesta": "Mar Caspio", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Caspian_Sea_from_orbit.jpg", "explicacion": "El cuerpo de agua endorreico interior más grande de la Tierra.[6]" },
-        { "id": "op4", "respuesta": "Mar de Ross", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Ross_Sea.jpg", "explicacion": "Mar gélido ubicado en el Océano Antártico de 637,000 km2.[6]" },
-        { "id": "op5", "respuesta": "Mar de Chukchi", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Chukchi_Sea.jpg", "explicacion": "Mar marginal gélido parte del Océano Ártico.[6]" },
-        { "id": "op6", "respuesta": "Mar de Timor", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Timor3.png", "explicacion": "Cuerpo de agua extenso situado en la región de las Indias Orientales.[6]" },
-        { "id": "op7", "respuesta": "Mar del Norte", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/North_Sea.jpg", "explicacion": "Mar marginal crítico del Atlántico septentrional.[6]" },
-        { "id": "op8", "respuesta": "Mar Levantino", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Levantine_Sea.jpg", "explicacion": "La subdivisión más oriental del Mar Mediterráneo.[6]" },
-        { "id": "op9", "respuesta": "Mar de Arafura", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Arafura_Sea.jpg", "explicacion": "Extenso mar de 650,000 kilómetros cuadrados cerca de Oceanía.[6]" },
-        { "id": "op10", "respuesta": "Mar de Bellingshausen", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Bellingshausen_Sea.jpg", "explicacion": "Masa de agua marina conectada a la costa antártica.[6]" },
-        { "id": "op11", "respuesta": "Mar de Beaufort", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Beaufort_Sea.jpg", "explicacion": "Mar del Ártico que baña las costas norteamericanas.[6]" },
-        { "id": "op12", "respuesta": "Mar Líbico", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Libyan_Sea.jpg", "explicacion": "Región del Mediterráneo que limita directamente con el norte de África.[6]" },
-        { "id": "op13", "respuesta": "Mar de Mawson", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Mawson_Sea.jpg", "explicacion": "Masa oceánica antártica con una extensión de 333,000 km2.[6]" },
-        { "id": "op14", "respuesta": "Mar de Java", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Java_Sea.jpg", "explicacion": "Mar interinsular que baña las extensas costas de Indonesia.[6]" },
-        { "id": "op15", "respuesta": "Golfo de Tailandia", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Gulf_of_Thailand.jpg", "explicacion": "Mar marginal masivo en el sudeste de Asia de 304,000 km2.[6]" },
-        { "id": "op16", "respuesta": "Mar Celta", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Celtic_Sea.jpg", "explicacion": "Área oceánica que rodea la costa atlántica europea y británica.[6]" },
-        { "id": "op17", "respuesta": "Mar Egeo", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Aegean_Sea.jpg", "explicacion": "Famoso mar de aguas cristalinas insertado entre Grecia y Turquía.[6]" },
-        { "id": "op18", "respuesta": "Golfo de Anadyr", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Gulf_of_Anadyr.jpg", "explicacion": "Clasificado como un mar costero que baña la remota Siberia oriental.[6]" },
-        { "id": "op19", "respuesta": "Mar de las Molucas", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Molucca_Sea.jpg", "explicacion": "Zona marina indonesia geológicamente activa.[6]" },
-        { "id": "op20", "respuesta": "Mar de Omán", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Gulf_of_Oman.jpg", "explicacion": "Estrecho cuerpo de agua que conecta al Golfo Pérsico.[6]" },
-        { "id": "op21", "respuesta": "Mar Jónico", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Ionian_Sea.jpg", "explicacion": "Extensión mediterránea de gran profundidad frente a Italia y Grecia.[6]" },
-        { "id": "op22", "respuesta": "Golfo de California", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Gulf_of_California.jpg", "explicacion": "También conocido como Mar de Cortés, de alta biodiversidad endémica.[6]" },
-        { "id": "op23", "respuesta": "Mar Balear", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Balearic_Sea.jpg", "explicacion": "Área del mar Mediterráneo ubicada entre España y las islas homónimas.[6]" },
-        { "id": "op24", "respuesta": "Mar de Coral", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Coral_Sea_map.png", "explicacion": "Hogar de inmensos sistemas de arrecifes en Australia.[6]" },
-        { "id": "op25", "respuesta": "Mar de Láptev", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Laptev_Sea.png", "explicacion": "Mar marginal extremadamente frío localizado en la cuenca ártica rusa." },
-        { "id": "op26", "respuesta": "Mar Caribe", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Caribbean_general_map.png", "explicacion": "Extenso mar tropical salino que alberga miles de islas antillanas." },
-        { "id": "op27", "respuesta": "Mar Negro", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Black_Sea.jpg", "explicacion": "Masivo cuerpo hidrológico fuertemente influido por la cuenca rusa.[6]" },
-        { "id": "op28", "respuesta": "Mar Adriático", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Adriatic_Sea.jpg", "explicacion": "Rama de agua que separa la península italiana de los Balcanes.[6]" },
-        { "id": "op29", "respuesta": "Mar de Azov", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Sea_of_Azov.jpg", "explicacion": "Mar somero que se conecta geográficamente con el Mar Negro.[6]" },
-        { "id": "op30", "respuesta": "Golfo de Guinea", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Gulf_of_Guinea.jpg", "explicacion": "Cuerpo ecuatorial atlántico de altísima relevancia regional africana.[6]" },
-        { "id": "op31", "respuesta": "Mar de Barents", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Barents_Sea.jpg", "explicacion": "Una zona marítima clave compartida entre Noruega y Rusia.[6]" },
-        { "id": "op32", "respuesta": "Mar de Kara", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Kara_Sea.jpg", "explicacion": "Mar marginal ruso separado del Mar de Barents por un estrecho.[6]" },
-        { "id": "op33", "respuesta": "Mar de Siberia Oriental", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/East_Siberian_Sea.jpg", "explicacion": "Cuerpo congelado contiguo al Ártico de baja salinidad.[6]" },
-        { "id": "op34", "respuesta": "Mar de Groenlandia", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Greenland_Sea.jpg", "explicacion": "Mar gélido fundamental en la circulación atlántica del norte.[6]" },
-        { "id": "op35", "respuesta": "Mar de Lincoln", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lincoln_Sea.jpg", "explicacion": "Reconocido por organizaciones oceanográficas en la punta ártica.[6]" },
-        { "id": "op36", "respuesta": "Mar de Alborán", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Alboran_Sea.jpg", "explicacion": "Punto de entrada marítimo oriental que conecta con Gibraltar.[6]" }
+        {
+          "id": "op2",
+          "respuesta": "Mar Rojo",
+          "imagen": "/imgs/mar/1.jpg",
+          "explicacion": "Conectado al mar Mediterráneo a través del Canal de Suez."
+        },
+        {
+          "id": "op3",
+          "respuesta": "Mar Caspio",
+          "imagen": "/imgs/mar/2.jpg",
+          "explicacion": "El cuerpo de agua endorreico interior más grande de la Tierra."
+        },
+        {
+          "id": "op4",
+          "respuesta": "Mar de Ross",
+          "imagen": "/imgs/mar/3.jpg",
+          "explicacion": "Mar gélido ubicado en el Océano Antártico de 637,000 km2."
+        },
+        {
+          "id": "op5",
+          "respuesta": "Mar de Chukchi",
+          "imagen": "/imgs/mar/4.jpg",
+          "explicacion": "Mar marginal gélido parte del Océano Ártico."
+        },
+        {
+          "id": "op6",
+          "respuesta": "Mar de Timor",
+          "imagen": "/imgs/mar/5.jpg",
+          "explicacion": "Cuerpo de agua extenso situado en la región de las Indias Orientales."
+        },
+        {
+          "id": "op7",
+          "respuesta": "Mar del Norte",
+          "imagen": "/imgs/mar/6.jpg",
+          "explicacion": "Mar marginal crítico del Atlántico septentrional."
+        },
+        {
+          "id": "op8",
+          "respuesta": "Mar Levantino",
+          "imagen": "/imgs/mar/7.jpg",
+          "explicacion": "La subdivisión más oriental del Mar Mediterráneo."
+        },
+        {
+          "id": "op9",
+          "respuesta": "Mar de Arafura",
+          "imagen": "/imgs/mar/8.jpg",
+          "explicacion": "Extenso mar de 650,000 kilómetros cuadrados cerca de Oceanía."
+        },
+        {
+          "id": "op10",
+          "respuesta": "Mar de Bellingshausen",
+          "imagen": "/imgs/mar/9.jpg",
+          "explicacion": "Masa de agua marina conectada a la costa antártica."
+        },
+        {
+          "id": "op11",
+          "respuesta": "Mar de Beaufort",
+          "imagen": "/imgs/mar/10.jpg",
+          "explicacion": "Mar del Ártico que baña las costas norteamericanas."
+        },
+        {
+          "id": "op12",
+          "respuesta": "Mar Líbico",
+          "imagen": "/imgs/mar/11.jpg",
+          "explicacion": "Región del Mediterráneo que limita directamente con el norte de África."
+        },
+        {
+          "id": "op13",
+          "respuesta": "Mar de Mawson",
+          "imagen": "/imgs/mar/12.jpg",
+          "explicacion": "Masa oceánica antártica con una extensión de 333,000 km2."
+        },
+        {
+          "id": "op14",
+          "respuesta": "Mar de Java",
+          "imagen": "/imgs/mar/13.jpg",
+          "explicacion": "Mar interinsular que baña las extensas costas de Indonesia."
+        },
+        {
+          "id": "op15",
+          "respuesta": "Golfo de Tailandia",
+          "imagen": "/imgs/mar/14.jpg",
+          "explicacion": "Mar marginal masivo en el sudeste de Asia de 304,000 km2."
+        },
+        {
+          "id": "op16",
+          "respuesta": "Mar Celta",
+          "imagen": "/imgs/mar/15.jpg",
+          "explicacion": "Área oceánica que rodea la costa atlántica europea y británica."
+        },
+        {
+          "id": "op17",
+          "respuesta": "Mar Egeo",
+          "imagen": "/imgs/mar/16.jpg",
+          "explicacion": "Famoso mar de aguas cristalinas insertado entre Grecia y Turquía."
+        },
+        {
+          "id": "op18",
+          "respuesta": "Golfo de Anadyr",
+          "imagen": "/imgs/mar/17.jpg",
+          "explicacion": "Clasificado como un mar costero que baña la remota Siberia oriental."
+        },
+        {
+          "id": "op19",
+          "respuesta": "Mar de las Molucas",
+          "imagen": "/imgs/mar/18.jpg",
+          "explicacion": "Zona marina indonesia geológicamente activa."
+        },
+        {
+          "id": "op20",
+          "respuesta": "Mar de Omán",
+          "imagen": "/imgs/mar/19.jpg",
+          "explicacion": "Estrecho cuerpo de agua que conecta al Golfo Pérsico."
+        },
+        {
+          "id": "op21",
+          "respuesta": "Mar Jónico",
+          "imagen": "/imgs/mar/20.jpg",
+          "explicacion": "Extensión mediterránea de gran profundidad frente a Italia y Grecia."
+        },
+        {
+          "id": "op22",
+          "respuesta": "Golfo de California",
+          "imagen": "/imgs/mar/21.jpg",
+          "explicacion": "También conocido como Mar de Cortés, de alta biodiversidad endémica."
+        },
+        {
+          "id": "op23",
+          "respuesta": "Mar Balear",
+          "imagen": "/imgs/mar/22.jpg",
+          "explicacion": "Área del mar Mediterráneo ubicada entre España y las islas homónimas."
+        },
+        {
+          "id": "op24",
+          "respuesta": "Mar de Coral",
+          "imagen": "/imgs/mar/23.jpg",
+          "explicacion": "Hogar de inmensos sistemas de arrecifes en Australia."
+        },
+        {
+          "id": "op25",
+          "respuesta": "Mar de Láptev",
+          "imagen": "/imgs/mar/24.jpg",
+          "explicacion": "Mar marginal extremadamente frío localizado en la cuenca ártica rusa."
+        },
+        {
+          "id": "op26",
+          "respuesta": "Mar Caribe",
+          "imagen": "/imgs/mar/25.jpg",
+          "explicacion": "Extenso mar tropical salino que alberga miles de islas antillanas."
+        },
+        {
+          "id": "op27",
+          "respuesta": "Mar Negro",
+          "imagen": "/imgs/mar/26.jpg",
+          "explicacion": "Masivo cuerpo hidrológico fuertemente influido por la cuenca rusa."
+        },
+        {
+          "id": "op28",
+          "respuesta": "Mar Adriático",
+          "imagen": "/imgs/mar/27.jpg",
+          "explicacion": "Rama de agua que separa la península italiana de los Balcanes."
+        },
+        {
+          "id": "op29",
+          "respuesta": "Mar de Azov",
+          "imagen": "/imgs/mar/28.jpg",
+          "explicacion": "Mar somero que se conecta geográficamente con el Mar Negro."
+        },
+        {
+          "id": "op30",
+          "respuesta": "Golfo de Guinea",
+          "imagen": "/imgs/mar/29.jpg",
+          "explicacion": "Cuerpo ecuatorial atlántico de altísima relevancia regional africana."
+        },
+        {
+          "id": "op31",
+          "respuesta": "Mar de Barents",
+          "imagen": "/imgs/mar/30.jpg",
+          "explicacion": "Una zona marítima clave compartida entre Noruega y Rusia."
+        },
+        {
+          "id": "op32",
+          "respuesta": "Mar de Kara",
+          "imagen": "/imgs/mar/31.jpg",
+          "explicacion": "Mar marginal ruso separado del Mar de Barents por un estrecho."
+        },
+        {
+          "id": "op33",
+          "respuesta": "Mar de Siberia Oriental",
+          "imagen": "/imgs/mar/32.jpg",
+          "explicacion": "Cuerpo congelado contiguo al Ártico de baja salinidad."
+        },
+        {
+          "id": "op34",
+          "respuesta": "Mar de Groenlandia",
+          "imagen": "/imgs/mar/33.jpg",
+          "explicacion": "Mar gélido fundamental en la circulación atlántica del norte."
+        },
+        {
+          "id": "op35",
+          "respuesta": "Mar de Lincoln",
+          "imagen": "/imgs/mar/34.jpg",
+          "explicacion": "Reconocido por organizaciones oceanográficas en la punta ártica."
+        },
+        {
+          "id": "op36",
+          "respuesta": "Mar de Alborán",
+          "imagen": "/imgs/mar/35.jpg",
+          "explicacion": "Punto de entrada marítimo oriental que conecta con Gibraltar."
+        }
       ]
     },
     {
       "id": "rio",
       "opciones": [
-        { "id": "op2", "respuesta": "Río Conchos", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Rio_Conchos.jpg", "explicacion": "Arteria lótica muy administrada en el norte árido de México.[4]" },
-        { "id": "op3", "respuesta": "Río Lerma", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Rio_Lerma.jpg", "explicacion": "Caudal crítico que finaliza vertiendo nutrientes al Lago Chapala.[7]" },
-        { "id": "op4", "respuesta": "Río Marañón", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Rio_Maranon.jpg", "explicacion": "Caudaloso río andino que actúa como fuente vital del río Amazonas." },
-        { "id": "op5", "respuesta": "Río Mahaweli", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Mahaweli_River.jpg", "explicacion": "Extenso y aislado río insular que atraviesa el terreno de Sri Lanka.[8]" },
-        { "id": "op6", "respuesta": "Río Colorado", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Colorado_River.jpg", "explicacion": "Majestuoso río que esculpe cañones y está sujeto a tratados internacionales.[4]" },
-        { "id": "op7", "respuesta": "Río Bravo (Río Grande)", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Rio_Grande.jpg", "explicacion": "Famoso río limítrofe internacional entre EE. UU. y México.[4]" },
-        { "id": "op8", "respuesta": "Río Tijuana", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Tijuana_River.jpg", "explicacion": "Pequeño sistema lótico transfronterizo de alto impacto político local.[4]" },
-        { "id": "op9", "respuesta": "Río Amazonas", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Amazon_River,_Sentinel-2.jpg", "explicacion": "El sistema hidrológico fluvial volumétricamente más masivo del planeta." },
-        { "id": "op10", "respuesta": "Río Ucayali", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Ucayali_River.jpg", "explicacion": "Afluente en margen derecho fundamental en el origen amazónico." },
-        { "id": "op11", "respuesta": "Río Támesis", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/River_Thames.jpg", "explicacion": "Histórico caudal británico de suma importancia mercantil y cultural." },
-        { "id": "op12", "respuesta": "Río Trent", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/River_Trent.jpg", "explicacion": "Vasta ruta fluvial de drenaje en el centro de Inglaterra." },
-        { "id": "op13", "respuesta": "Río Clyde", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/River_Clyde.jpg", "explicacion": "Sistema lótico vital que fluye e interconecta zonas en Escocia." },
-        { "id": "op14", "respuesta": "Río Hudson", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Hudson_River.jpg", "explicacion": "Nombrado históricamente por el famoso explorador Henry Hudson." },
-        { "id": "op15", "respuesta": "Río Misisipi", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Mississippi_River.jpg", "explicacion": "Gigantesca cinta transportadora pluvial a lo largo de Norteamérica." },
-        { "id": "op16", "respuesta": "Río Rouge", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/River_Rouge.jpg", "explicacion": "Caudal estadounidense de Míchigan, conocido por influencias industriales." },
-        { "id": "op17", "respuesta": "Río Arnold", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Arnold_River.jpg", "explicacion": "Importante drenaje ribereño presente en la isla de Nueva Zelanda.[9]" },
-        { "id": "op18", "respuesta": "Río Yangtsé", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Yangtze_River.jpg", "explicacion": "El río lótico más largo del continente asiático y tercero del mundo." },
-        { "id": "op19", "respuesta": "Río Amarillo", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Yellow_River.jpg", "explicacion": "Caudal colosal chino famoso por su masivo arrastre de sedimentos ricos." },
-        { "id": "op20", "respuesta": "Río Mekong", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Mekong_River.jpg", "explicacion": "Arteria fluvial internacional que serpentea por todo el sudeste asiático." },
-        { "id": "op21", "respuesta": "Río Ganges", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Ganges_River.jpg", "explicacion": "Río sagrado con una enorme densidad poblacional en sus deltas." },
-        { "id": "op22", "respuesta": "Río Indo", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Indus_River.jpg", "explicacion": "Colosal torrente alimentado por deshielos himalayos fluyendo en Pakistán." },
-        { "id": "op23", "respuesta": "Río Danubio", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Danube_River.jpg", "explicacion": "Sistema lótico paneuropeo que cruza majestuosamente por diez naciones." },
-        { "id": "op24", "respuesta": "Río Volga", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Volga_River.jpg", "explicacion": "El curso de agua de origen natural más extenso de la placa europea." },
-        { "id": "op25", "respuesta": "Río Rin", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Rhine_River.jpg", "explicacion": "Ruta de navegación continental extremadamente densa y productiva comercialmente." },
-        { "id": "op26", "respuesta": "Río Sena", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Seine_River.jpg", "explicacion": "Canal fluvial apacible y mundialmente conocido que baña las costas de París." },
-        { "id": "op27", "respuesta": "Río Loira", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Loire_River.jpg", "explicacion": "El esbelto río que cruza íntegramente la vasta campiña francesa." },
-        { "id": "op28", "respuesta": "Río Elba", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Elbe_River.jpg", "explicacion": "Importante red de escurrimiento originada en la República Checa y Alemania." },
-        { "id": "op29", "respuesta": "Río Orinoco", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Orinoco_River.jpg", "explicacion": "Extenso y serpenteante volumen de agua en el norte de Sudamérica." },
-        { "id": "op30", "respuesta": "Río Paraná", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Parana_River.jpg", "explicacion": "Arteria sureña continental compartida geográficamente entre Brasil y Argentina." },
-        { "id": "op31", "respuesta": "Río Paraguay", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Paraguay_River.jpg", "explicacion": "Caudaloso curso principal que sustenta la hidrología del Pantanal sudamericano." },
-        { "id": "op32", "respuesta": "Río San Francisco", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Sao_Francisco_River.jpg", "explicacion": "Cuenca inmensa que irriga vastas extensiones internas de la nación brasileña." },
-        { "id": "op33", "respuesta": "Río Congo", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Congo_River.jpg", "explicacion": "El cuerpo hídrico en movimiento de mayor profundidad medida comprobada." },
-        { "id": "op34", "respuesta": "Río Níger", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Niger_River.jpg", "explicacion": "Sistema lótico vital estructurando el abastecimiento del África Occidental." },
-        { "id": "op35", "respuesta": "Río Zambeze", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Zambezi_River.jpg", "explicacion": "Corriente atronadora formadora del espectáculo geológico en las Cataratas Victoria." },
-        { "id": "op36", "respuesta": "Río Yukón", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Yukon_River.jpg", "explicacion": "Afluente salvaje extendiéndose indomable por Alaska y Canadá septentrional." }
+        {
+          "id": "op2",
+          "respuesta": "Río Conchos",
+          "imagen": "/imgs/rio/1.jpg",
+          "explicacion": "Arteria lótica muy administrada en el norte árido de México."
+        },
+        {
+          "id": "op3",
+          "respuesta": "Río Lerma",
+          "imagen": "/imgs/rio/2.jpg",
+          "explicacion": "Caudal crítico que finaliza vertiendo nutrientes al Lago Chapala."
+        },
+        {
+          "id": "op4",
+          "respuesta": "Río Marañón",
+          "imagen": "/imgs/rio/3.jpg",
+          "explicacion": "Caudaloso río andino que actúa como fuente vital del río Amazonas."
+        },
+        {
+          "id": "op5",
+          "respuesta": "Río Mahaweli",
+          "imagen": "/imgs/rio/4.jpg",
+          "explicacion": "Extenso y aislado río insular que atraviesa el terreno de Sri Lanka."
+        },
+        {
+          "id": "op6",
+          "respuesta": "Río Colorado",
+          "imagen": "/imgs/rio/5.jpg",
+          "explicacion": "Majestuoso río que esculpe cañones y está sujeto a tratados internacionales."
+        },
+        {
+          "id": "op7",
+          "respuesta": "Río Bravo (Río Grande)",
+          "imagen": "/imgs/rio/6.jpg",
+          "explicacion": "Famoso río limítrofe internacional entre EE. UU. y México."
+        },
+        {
+          "id": "op8",
+          "respuesta": "Río Tijuana",
+          "imagen": "/imgs/rio/7.jpg",
+          "explicacion": "Pequeño sistema lótico transfronterizo de alto impacto político local."
+        },
+        {
+          "id": "op9",
+          "respuesta": "Río Amazonas",
+          "imagen": "/imgs/rio/8.jpg",
+          "explicacion": "El sistema hidrológico fluvial volumétricamente más masivo del planeta."
+        },
+        {
+          "id": "op10",
+          "respuesta": "Río Ucayali",
+          "imagen": "/imgs/rio/9.jpg",
+          "explicacion": "Afluente en margen derecho fundamental en el origen amazónico."
+        },
+        {
+          "id": "op11",
+          "respuesta": "Río Támesis",
+          "imagen": "/imgs/rio/10.jpg",
+          "explicacion": "Histórico caudal británico de suma importancia mercantil y cultural."
+        },
+        {
+          "id": "op12",
+          "respuesta": "Río Trent",
+          "imagen": "/imgs/rio/11.jpg",
+          "explicacion": "Vasta ruta fluvial de drenaje en el centro de Inglaterra."
+        },
+        {
+          "id": "op13",
+          "respuesta": "Río Clyde",
+          "imagen": "/imgs/rio/12.jpg",
+          "explicacion": "Sistema lótico vital que fluye e interconecta zonas en Escocia."
+        },
+        {
+          "id": "op14",
+          "respuesta": "Río Hudson",
+          "imagen": "/imgs/rio/13.jpg",
+          "explicacion": "Nombrado históricamente por el famoso explorador Henry Hudson."
+        },
+        {
+          "id": "op15",
+          "respuesta": "Río Misisipi",
+          "imagen": "/imgs/rio/14.jpg",
+          "explicacion": "Gigantesca cinta transportadora pluvial a lo largo de Norteamérica."
+        },
+        {
+          "id": "op16",
+          "respuesta": "Río Rouge",
+          "imagen": "/imgs/rio/15.jpg",
+          "explicacion": "Caudal estadounidense de Míchigan, conocido por influencias industriales."
+        },
+        {
+          "id": "op17",
+          "respuesta": "Río Arnold",
+          "imagen": "/imgs/rio/16.jpg",
+          "explicacion": "Importante drenaje ribereño presente en la isla de Nueva Zelanda."
+        },
+        {
+          "id": "op18",
+          "respuesta": "Río Yangtsé",
+          "imagen": "/imgs/rio/17.jpg",
+          "explicacion": "El río lótico más largo del continente asiático y tercero del mundo."
+        },
+        {
+          "id": "op19",
+          "respuesta": "Río Amarillo",
+          "imagen": "/imgs/rio/18.jpg",
+          "explicacion": "Caudal colosal chino famoso por su masivo arrastre de sedimentos ricos."
+        },
+        {
+          "id": "op20",
+          "respuesta": "Río Mekong",
+          "imagen": "/imgs/rio/19.jpg",
+          "explicacion": "Arteria fluvial internacional que serpentea por todo el sudeste asiático."
+        },
+        {
+          "id": "op21",
+          "respuesta": "Río Ganges",
+          "imagen": "/imgs/rio/20.jpg",
+          "explicacion": "Río sagrado con una enorme densidad poblacional en sus deltas."
+        },
+        {
+          "id": "op22",
+          "respuesta": "Río Indo",
+          "imagen": "/imgs/rio/21.jpg",
+          "explicacion": "Colosal torrente alimentado por deshielos himalayos fluyendo en Pakistán."
+        },
+        {
+          "id": "op23",
+          "respuesta": "Río Danubio",
+          "imagen": "/imgs/rio/22.jpg",
+          "explicacion": "Sistema lótico paneuropeo que cruza majestuosamente por diez naciones."
+        },
+        {
+          "id": "op24",
+          "respuesta": "Río Volga",
+          "imagen": "/imgs/rio/23.jpg",
+          "explicacion": "El curso de agua de origen natural más extenso de la placa europea."
+        },
+        {
+          "id": "op25",
+          "respuesta": "Río Rin",
+          "imagen": "/imgs/rio/24.jpg",
+          "explicacion": "Ruta de navegación continental extremadamente densa y productiva comercialmente."
+        },
+        {
+          "id": "op26",
+          "respuesta": "Río Sena",
+          "imagen": "/imgs/rio/25.jpg",
+          "explicacion": "Canal fluvial apacible y mundialmente conocido que baña las costas de París."
+        },
+        {
+          "id": "op27",
+          "respuesta": "Río Loira",
+          "imagen": "/imgs/rio/26.jpg",
+          "explicacion": "El esbelto río que cruza íntegramente la vasta campiña francesa."
+        },
+        {
+          "id": "op28",
+          "respuesta": "Río Elba",
+          "imagen": "/imgs/rio/27.jpg",
+          "explicacion": "Importante red de escurrimiento originada en la República Checa y Alemania."
+        },
+        {
+          "id": "op29",
+          "respuesta": "Río Orinoco",
+          "imagen": "/imgs/rio/28.jpg",
+          "explicacion": "Extenso y serpenteante volumen de agua en el norte de Sudamérica."
+        },
+        {
+          "id": "op30",
+          "respuesta": "Río Paraná",
+          "imagen": "/imgs/rio/29.jpg",
+          "explicacion": "Arteria sureña continental compartida geográficamente entre Brasil y Argentina."
+        },
+        {
+          "id": "op31",
+          "respuesta": "Río Paraguay",
+          "imagen": "/imgs/rio/30.jpg",
+          "explicacion": "Caudaloso curso principal que sustenta la hidrología del Pantanal sudamericano."
+        },
+        {
+          "id": "op32",
+          "respuesta": "Río San Francisco",
+          "imagen": "/imgs/rio/31.jpg",
+          "explicacion": "Cuenca inmensa que irriga vastas extensiones internas de la nación brasileña."
+        },
+        {
+          "id": "op33",
+          "respuesta": "Río Congo",
+          "imagen": "/imgs/rio/32.jpg",
+          "explicacion": "El cuerpo hídrico en movimiento de mayor profundidad medida comprobada."
+        },
+        {
+          "id": "op34",
+          "respuesta": "Río Níger",
+          "imagen": "/imgs/rio/33.jpg",
+          "explicacion": "Sistema lótico vital estructurando el abastecimiento del África Occidental."
+        },
+        {
+          "id": "op35",
+          "respuesta": "Río Zambeze",
+          "imagen": "/imgs/rio/34.jpg",
+          "explicacion": "Corriente atronadora formadora del espectáculo geológico en las Cataratas Victoria."
+        },
+        {
+          "id": "op36",
+          "respuesta": "Río Yukón",
+          "imagen": "/imgs/rio/35.jpg",
+          "explicacion": "Afluente salvaje extendiéndose indomable por Alaska y Canadá septentrional."
+        }
       ]
     },
     {
       "id": "nube",
       "opciones": [
-        { "id": "op2", "respuesta": "Mammatus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Mammatus-clouds-Tulsa-1973.png", "explicacion": "Patrón celular de dramáticas bolsas colgantes generadas por convección inversa.[11]" },
-        { "id": "op3", "respuesta": "Flammagenitus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Pyrocumulus_Cloud_Station_Fire_082909.jpg", "explicacion": "Nube pirocumulativa extraordinariamente densa producida por un megaincendio.[12]" },
-        { "id": "op4", "respuesta": "Pileus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cumulus_congestus_pileus.JPG", "explicacion": "Tenue formación horizontal en forma de capuchón lenticular superior.[13]" },
-        { "id": "op5", "respuesta": "Cumulonimbus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cumulonimbus_cloud.jpg", "explicacion": "Arquitecturas nubosas tridimensionales rotatorias con un gran desarrollo vertical." },
-        { "id": "op6", "respuesta": "Altocumulus lenticularis", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Altocumulus-lenticularis.jpg", "explicacion": "Aerodinámica nube semejante a un lente formada en picos topográficos.[13]" },
-        { "id": "op7", "respuesta": "Shelf Cloud (Arcus)", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Shelf_Cloud_4_8_2013_(146961335).jpeg", "explicacion": "Wał nuboso compacto y en rollo asociado a un agresivo frente frío de tormenta." },
-        { "id": "op8", "respuesta": "Cumulonimbus calvus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cumulonimbus_NOAA_gov.jpg", "explicacion": "Nube tormentosa que aún no logra desarrollar el yunque congelado superior." },
-        { "id": "op9", "respuesta": "Pyrocumulonimbus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Pyrocumulus_cloud_produced_by_the_Dixie_Fire_on_July_22-5826.jpg", "explicacion": "Evolución extrema que desencadena brutales tormentas eléctricas desde llamas.[14]" },
-        { "id": "op10", "respuesta": "Cirrus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cirrus_clouds2.jpg", "explicacion": "Finas ráfagas estiradas compuestas íntegramente de microscópico hielo puro." },
-        { "id": "op11", "respuesta": "Cirrocumulus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cirrocumulus_clouds.jpg", "explicacion": "Remos o escamas algodonosas agrupadas fríamente en la alta atmósfera." },
-        { "id": "op12", "respuesta": "Altocumulus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Altocumulus_cloud.jpg", "explicacion": "Manchas medias o parches hinchados precursores de una lluvia venidera." },
-        { "id": "op13", "respuesta": "Stratocumulus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Stratocumulus.jpg", "explicacion": "Bandas grises, pesadas y abultadas de humedad de baja elevación horizontal." },
-        { "id": "op14", "respuesta": "Nimbostratus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Nimbostratus_cloud.jpg", "explicacion": "Manto nuboso plomizo sin forma clara que bloquea activamente el sol completo." },
-        { "id": "op15", "respuesta": "Altostratus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Altostratus_cloud.jpg", "explicacion": "Película nubosa traslúcida esparcida grisácea a nivel medio sobre el cielo." },
-        { "id": "op16", "respuesta": "Stratus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Stratus_cloud.jpg", "explicacion": "Espesa capa niebla uniforme que abarca masivamente cubriendo cielos enteros." },
-        { "id": "op17", "respuesta": "Cumulus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cumulus_clouds_in_fair_weather.jpeg", "explicacion": "Bolas algodonosas aisladas de bordes suaves con base completamente plana." },
-        { "id": "op18", "respuesta": "Cumulus congestus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cumulus_congestus.jpg", "explicacion": "Elevada y masiva torre convectiva ascendente hirviente sin convertirse en tormenta." },
-        { "id": "op19", "respuesta": "Cumulonimbus capillatus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cumulonimbus_capillatus_incus.jpg", "explicacion": "Nube adulta letal de tormenta con su extremo superior ya fracturado o rasgado." },
-        { "id": "op20", "respuesta": "Incus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cumulonimbus_incus_1.jpg", "explicacion": "Yunque superior y masivo que delata a una imponente supercélula de tempestad." },
-        { "id": "op21", "respuesta": "Cirrostratus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cirrostratus_cloud.jpg", "explicacion": "Un manto blanco lechoso veloz que a menudo crea un fenómeno de halo solar brillante." },
-        { "id": "op22", "respuesta": "Fractus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Fractus_cloud.jpg", "explicacion": "Fragmentos arrastrados y destrozados brutalmente por vientos feroces tormentosos." },
-        { "id": "op23", "respuesta": "Castellanus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Altocumulus_castellanus.jpg", "explicacion": "Miniaturas de castillos formadas al brotar verticalmente varias protuberancias nubosas unidas." },
-        { "id": "op24", "respuesta": "Floccus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cirrus_floccus.jpg", "explicacion": "Estructuras desgarradas y pequeñas que se asemejan curiosamente a mechones sueltos de lana." },
-        { "id": "op25", "respuesta": "Spissatus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cirrus_spissatus.jpg", "explicacion": "Versión lo suficientemente espesa del cirro como para tapar físicamente la luz y ocultar al sol." },
-        { "id": "op26", "respuesta": "Uncinus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cirrus_uncinus.jpg", "explicacion": "Hilos curvos con gancho arrastrados estéticamente a lo largo por los ágiles vientos en altura." },
-        { "id": "op27", "respuesta": "Fibratus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cirrus_fibratus.jpg", "explicacion": "Estrías casi lineales estiradas por completo en el cielo sin poseer el típico diseño o gancho curvo." },
-        { "id": "op28", "respuesta": "Nebulosus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Stratus_nebulosus.jpg", "explicacion": "Capa extremadamente carente de detalles que actúa reduciendo la visibilidad total y envolviendo todo." },
-        { "id": "op29", "respuesta": "Lenticularis", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Lenticular_cloud.jpg", "explicacion": "Lentes en suspensión perfectos producidos a menudo debido a fuertes ondas topográficas aéreas." },
-        { "id": "op30", "respuesta": "Radiatus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cumulus_radiatus.jpg", "explicacion": "Extensas tiras formadas horizontalmente que convergen fugazmente ilusoriamente en el horizonte." },
-        { "id": "op31", "respuesta": "Duplicatus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Altocumulus_duplicatus.jpg", "explicacion": "Patrones atmosféricos superpuestos compitiendo ópticamente cruzándose a diferentes niveles físicos." },
-        { "id": "op32", "respuesta": "Undulatus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Altocumulus_undulatus.jpg", "explicacion": "Ondas casi paralelas y constantes muy similares formalmente al surco marcado sobre campo arenoso." },
-        { "id": "op33", "respuesta": "Lacunosus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Altocumulus_lacunosus.jpg", "explicacion": "Mantos que cuentan con agujeros regulares distribuidos que parecen dar forma de una precaria red." },
-        { "id": "op34", "respuesta": "Pannus", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Pannus_cloud.jpg", "explicacion": "Masas sucias desgarradas moviéndose rápidamente debajo del cuerpo madre o base principal gris." },
-        { "id": "op35", "respuesta": "Velum", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Cumulus_velum.jpg", "explicacion": "Franja nubosa que perfora e interseca transversalmente el cuerpo expansivo de otra ascendente." },
-        { "id": "op36", "respuesta": "Praecipitatio", "imagen": "https://commons.wikimedia.org/wiki/Special:FilePath/Praecipitatio.jpg", "explicacion": "Rastros visibles y gruesos de lluvia compacta cayendo que logran aterrizar en la superficie continental." }
+        {
+          "id": "op2",
+          "respuesta": "Mammatus",
+          "imagen": "/imgs/nube/1.jpg",
+          "explicacion": "Patrón celular de dramáticas bolsas colgantes generadas por convección inversa."
+        },
+        {
+          "id": "op3",
+          "respuesta": "Flammagenitus",
+          "imagen": "/imgs/nube/2.jpg",
+          "explicacion": "Nube pirocumulativa extraordinariamente densa producida por un megaincendio."
+        },
+        {
+          "id": "op4",
+          "respuesta": "Pileus",
+          "imagen": "/imgs/nube/3.jpg",
+          "explicacion": "Tenue formación horizontal en forma de capuchón lenticular superior."
+        },
+        {
+          "id": "op5",
+          "respuesta": "Cumulonimbus",
+          "imagen": "/imgs/nube/4.jpg",
+          "explicacion": "Arquitecturas nubosas tridimensionales rotatorias con un gran desarrollo vertical."
+        },
+        {
+          "id": "op6",
+          "respuesta": "Altocumulus lenticularis",
+          "imagen": "/imgs/nube/5.jpg",
+          "explicacion": "Aerodinámica nube semejante a un lente formada en picos topográficos."
+        },
+        {
+          "id": "op7",
+          "respuesta": "Shelf Cloud (Arcus)",
+          "imagen": "/imgs/nube/6.jpg",
+          "explicacion": "Wał nuboso compacto y en rollo asociado a un agresivo frente frío de tormenta."
+        },
+        {
+          "id": "op8",
+          "respuesta": "Cumulonimbus calvus",
+          "imagen": "/imgs/nube/7.jpg",
+          "explicacion": "Nube tormentosa que aún no logra desarrollar el yunque congelado superior."
+        },
+        {
+          "id": "op9",
+          "respuesta": "Pyrocumulonimbus",
+          "imagen": "/imgs/nube/8.jpg",
+          "explicacion": "Evolución extrema que desencadena brutales tormentas eléctricas desde llamas."
+        },
+        {
+          "id": "op10",
+          "respuesta": "Cirrus",
+          "imagen": "/imgs/nube/9.jpg",
+          "explicacion": "Finas ráfagas estiradas compuestas íntegramente de microscópico hielo puro."
+        },
+        {
+          "id": "op11",
+          "respuesta": "Cirrocumulus",
+          "imagen": "/imgs/nube/10.jpg",
+          "explicacion": "Remos o escamas algodonosas agrupadas fríamente en la alta atmósfera."
+        },
+        {
+          "id": "op12",
+          "respuesta": "Altocumulus",
+          "imagen": "/imgs/nube/11.jpg",
+          "explicacion": "Manchas medias o parches hinchados precursores de una lluvia venidera."
+        },
+        {
+          "id": "op13",
+          "respuesta": "Stratocumulus",
+          "imagen": "/imgs/nube/12.jpg",
+          "explicacion": "Bandas grises, pesadas y abultadas de humedad de baja elevación horizontal."
+        },
+        {
+          "id": "op14",
+          "respuesta": "Nimbostratus",
+          "imagen": "/imgs/nube/13.jpg",
+          "explicacion": "Manto nuboso plomizo sin forma clara que bloquea activamente el sol completo."
+        },
+        {
+          "id": "op15",
+          "respuesta": "Altostratus",
+          "imagen": "/imgs/nube/14.jpg",
+          "explicacion": "Película nubosa traslúcida esparcida grisácea a nivel medio sobre el cielo."
+        },
+        {
+          "id": "op16",
+          "respuesta": "Stratus",
+          "imagen": "/imgs/nube/15.jpg",
+          "explicacion": "Espesa capa niebla uniforme que abarca masivamente cubriendo cielos enteros."
+        },
+        {
+          "id": "op17",
+          "respuesta": "Cumulus",
+          "imagen": "/imgs/nube/16.jpg",
+          "explicacion": "Bolas algodonosas aisladas de bordes suaves con base completamente plana."
+        },
+        {
+          "id": "op18",
+          "respuesta": "Cumulus congestus",
+          "imagen": "/imgs/nube/17.jpg",
+          "explicacion": "Elevada y masiva torre convectiva ascendente hirviente sin convertirse en tormenta."
+        },
+        {
+          "id": "op19",
+          "respuesta": "Cumulonimbus capillatus",
+          "imagen": "/imgs/nube/18.jpg",
+          "explicacion": "Nube adulta letal de tormenta con su extremo superior ya fracturado o rasgado."
+        },
+        {
+          "id": "op20",
+          "respuesta": "Incus",
+          "imagen": "/imgs/nube/19.jpg",
+          "explicacion": "Yunque superior y masivo que delata a una imponente supercélula de tempestad."
+        },
+        {
+          "id": "op21",
+          "respuesta": "Cirrostratus",
+          "imagen": "/imgs/nube/20.jpg",
+          "explicacion": "Un manto blanco lechoso veloz que a menudo crea un fenómeno de halo solar brillante."
+        },
+        {
+          "id": "op22",
+          "respuesta": "Fractus",
+          "imagen": "/imgs/nube/21.jpg",
+          "explicacion": "Fragmentos arrastrados y destrozados brutalmente por vientos feroces tormentosos."
+        },
+        {
+          "id": "op23",
+          "respuesta": "Castellanus",
+          "imagen": "/imgs/nube/22.jpg",
+          "explicacion": "Miniaturas de castillos formadas al brotar verticalmente varias protuberancias nubosas unidas."
+        },
+        {
+          "id": "op24",
+          "respuesta": "Floccus",
+          "imagen": "/imgs/nube/23.jpg",
+          "explicacion": "Estructuras desgarradas y pequeñas que se asemejan curiosamente a mechones sueltos de lana."
+        },
+        {
+          "id": "op25",
+          "respuesta": "Spissatus",
+          "imagen": "/imgs/nube/24.jpg",
+          "explicacion": "Versión lo suficientemente espesa del cirro como para tapar físicamente la luz y ocultar al sol."
+        },
+        {
+          "id": "op26",
+          "respuesta": "Uncinus",
+          "imagen": "/imgs/nube/25.jpg",
+          "explicacion": "Hilos curvos con gancho arrastrados estéticamente a lo largo por los ágiles vientos en altura."
+        },
+        {
+          "id": "op27",
+          "respuesta": "Fibratus",
+          "imagen": "/imgs/nube/26.jpg",
+          "explicacion": "Estrías casi lineales estiradas por completo en el cielo sin poseer el típico diseño o gancho curvo."
+        },
+        {
+          "id": "op28",
+          "respuesta": "Nebulosus",
+          "imagen": "/imgs/nube/27.jpg",
+          "explicacion": "Capa extremadamente carente de detalles que actúa reduciendo la visibilidad total y envolviendo todo."
+        },
+        {
+          "id": "op29",
+          "respuesta": "Lenticularis",
+          "imagen": "/imgs/nube/28.jpg",
+          "explicacion": "Lentes en suspensión perfectos producidos a menudo debido a fuertes ondas topográficas aéreas."
+        },
+        {
+          "id": "op30",
+          "respuesta": "Radiatus",
+          "imagen": "/imgs/nube/29.jpg",
+          "explicacion": "Extensas tiras formadas horizontalmente que convergen fugazmente ilusoriamente en el horizonte."
+        },
+        {
+          "id": "op31",
+          "respuesta": "Duplicatus",
+          "imagen": "/imgs/nube/30.jpg",
+          "explicacion": "Patrones atmosféricos superpuestos compitiendo ópticamente cruzándose a diferentes niveles físicos."
+        },
+        {
+          "id": "op32",
+          "respuesta": "Undulatus",
+          "imagen": "/imgs/nube/31.jpg",
+          "explicacion": "Ondas casi paralelas y constantes muy similares formalmente al surco marcado sobre campo arenoso."
+        },
+        {
+          "id": "op33",
+          "respuesta": "Lacunosus",
+          "imagen": "/imgs/nube/32.jpg",
+          "explicacion": "Mantos que cuentan con agujeros regulares distribuidos que parecen dar forma de una precaria red."
+        },
+        {
+          "id": "op34",
+          "respuesta": "Pannus",
+          "imagen": "/imgs/nube/33.jpg",
+          "explicacion": "Masas sucias desgarradas moviéndose rápidamente debajo del cuerpo madre o base principal gris."
+        },
+        {
+          "id": "op35",
+          "respuesta": "Velum",
+          "imagen": "/imgs/nube/34.jpg",
+          "explicacion": "Franja nubosa que perfora e interseca transversalmente el cuerpo expansivo de otra ascendente."
+        },
+        {
+          "id": "op36",
+          "respuesta": "Praecipitatio",
+          "imagen": "/imgs/nube/35.jpg",
+          "explicacion": "Rastros visibles y gruesos de lluvia compacta cayendo que logran aterrizar en la superficie continental."
+        }
       ]
     }
   ]
