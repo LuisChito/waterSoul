@@ -4,12 +4,16 @@
 #  Interfaz gráfica con tkinter + Pillow
 # ============================================================
 
-import tkinter as tk
-from tkinter import ttk
+import json
+import shutil
 import threading
+from pathlib import Path
+
+import tkinter as tk
+from tkinter import filedialog
+from tkinter import ttk
 
 from base_hechos        import BaseDeHechos
-from base_conocimientos import BaseDeConocimientos
 from modulo_explicacion import ModuloExplicacion
 from modulo_imagenes    import obtener_imagen_tk, limpiar_cache
 
@@ -143,9 +147,11 @@ class WaterSoulApp(tk.Tk):
 
         # Módulos del SE
         self.base_hechos  = BaseDeHechos()
-        self.base_conocim = BaseDeConocimientos()
         self.mod_expl     = ModuloExplicacion()
-        self.mod_expl.TEXTOS.update(self.base_conocim.obtener_textos())
+
+        self._arbol_path = Path(__file__).with_name("base_conocimineto.json")
+        self._arbol_data = self._cargar_arbol_json()
+        self.posicion_arbol = None
 
         # Estado
         self.current   = 0
@@ -197,6 +203,60 @@ class WaterSoulApp(tk.Tk):
             w.destroy()
         self.canvas.yview_moveto(0)
         self.vsb.pack_forget()
+
+    def _cargar_arbol_json(self):
+        with self._arbol_path.open("r", encoding="utf-8") as archivo:
+            return json.load(archivo)
+
+    def _resolver_desde_arbol(self, hechos):
+        ramas = self._arbol_data.get("arbol", [])
+        reaccion = (hechos.get("reaccion") or "").strip()
+        rama = next((nodo for nodo in ramas if nodo.get("id") == reaccion), None)
+        if not rama:
+            return None
+
+        opciones = rama.get("opciones", [])
+        if not opciones:
+            return None
+
+        def indice_para(criterio):
+            valor = (hechos.get(criterio) or "").strip()
+            pregunta = next((pregunta for pregunta in PREGUNTAS if pregunta["criterio"] == criterio), None)
+            if not pregunta:
+                return None
+            for indice_opcion, opcion in enumerate(pregunta["opts"]):
+                if opcion[3] == valor:
+                    return indice_opcion
+            return None
+
+        indice_entorno = indice_para("entorno")
+        indice_percepcion = indice_para("percepcion")
+        indice_estilo = indice_para("estilo")
+        if None in (indice_entorno, indice_percepcion, indice_estilo):
+            return None
+
+        indice = ((indice_entorno * 4) + indice_percepcion) * 3 + indice_estilo
+        opcion_id = f"op{indice + 1}"
+        opcion = next((item for item in opciones if item.get("id") == opcion_id), None)
+
+        self.posicion_arbol = {
+            "rama": reaccion,
+            "indice": indice + 1,
+            "opcion_id": opcion_id,
+            "opcion_json_id": opcion.get("id", "") if opcion else "",
+        }
+
+        if not opcion:
+            return None
+
+        return {
+            "tipo": reaccion,
+            "respuesta": opcion.get("respuesta", ""),
+            "imagen": opcion.get("imagen", ""),
+            "explicacion": opcion.get("explicacion", ""),
+            "esencia": opcion.get("respuesta", ""),
+            "lugar": opcion.get("respuesta", ""),
+        }
 
     # ── Brand header ─────────────────────────────────────────
 
@@ -332,17 +392,15 @@ class WaterSoulApp(tk.Tk):
     # ── PANTALLA RESULTADO ────────────────────────────────────
 
     def _show_result(self):
-        regla = self.base_conocim.buscar_regla(self.hechos)
-        if not regla:
+        conc = self._resolver_desde_arbol(self.hechos)
+        if not conc:
             self._show_no_match()
             return
 
         self._clear_inner()
         self.vsb.pack_forget()
 
-        conc  = regla["conclusion"]
         tipo  = conc["tipo"]
-        textos = self.mod_expl.TEXTOS.get(tipo, {})
 
         self._brand(self.inner, "Tu resultado")
 
@@ -383,21 +441,7 @@ class WaterSoulApp(tk.Tk):
         threading.Thread(target=load_img, daemon=True).start()
 
         # 3) Botón para mostrar explicación (oculta por defecto)
-        bloques = []
-        explicacion_arbol = conc.get("explicacion", "").strip()
-        descripcion = textos.get("descripcion", "").strip()
-        recomendacion = textos.get("recomendacion", "").strip()
-
-        # Priorizar la explicación real proveniente del árbol JSON.
-        if explicacion_arbol:
-            bloques.append(f"Explicacion:\n{explicacion_arbol}")
-
-        if descripcion:
-            bloques.append(f"Descripcion:\n{descripcion}")
-        if recomendacion:
-            bloques.append(f"Recomendacion:\n{recomendacion}")
-
-        explicacion_txt = "\n\n".join(bloques)
+        explicacion_txt = conc.get("explicacion", "").strip()
         if not explicacion_txt:
             explicacion_txt = "Sin explicacion disponible para este resultado."
 
@@ -481,158 +525,183 @@ class WaterSoulApp(tk.Tk):
         return "\n".join(lineas)
 
     def _formatear_base_conocimientos(self, regla_actual):
-        lineas = ["Reglas del sistema:\n"]
-        for regla in self.base_conocim.reglas:
-            condiciones = regla["condiciones"]
-            conclusion = regla["conclusion"]
-            lineas.append(f"{regla['id']}")
-            lineas.append(
-                "  IF "
-                f"reaccion={condiciones['reaccion']}, "
-                f"entorno={condiciones['entorno']}, "
-                f"percepcion={condiciones['percepcion']}, "
-                f"estilo={condiciones['estilo']}"
-            )
-            lineas.append(
-                "  THEN "
-                f"tipo={conclusion['tipo']}, esencia={conclusion['esencia']}, lugar={conclusion['lugar']}"
-            )
-            if regla_actual and regla["id"] == regla_actual["id"]:
-                lineas.append("  -> Esta es la regla que se activó")
-            lineas.append("")
+        lineas = ["Posición guardada en memoria:\n"]
+        if self.posicion_arbol:
+            lineas.append(f"- Rama: {self.posicion_arbol['rama']}")
+            lineas.append(f"- Índice: {self.posicion_arbol['indice']}")
+            lineas.append(f"- Opción: {self.posicion_arbol['opcion_id']}")
+        else:
+            lineas.append("- Aún no se ha resuelto una consulta.")
         return "\n".join(lineas).strip()
 
     def _show_no_match(self):
-        self._abrir_formulario_conocimiento()
+        self._clear_inner()
+        self._brand(self.inner, "Sin coincidencia")
+
+        marco = tk.Frame(self.inner, bg=C["surface"])
+        marco.pack(fill="both", expand=True, padx=22)
+
+        tk.Label(marco, text="No se encontró una rama válida en el árbol.",
+                 font=FONT_HEAD, fg=C["blue_800"], bg=C["surface"]).pack(anchor="w", padx=16, pady=(16, 8))
+        tk.Label(marco, text=self._formatear_base_hechos(), font=FONT_SMALL,
+                 fg=C["text_mut"], bg=C["surface"], justify="left", wraplength=500).pack(anchor="w", padx=16)
+
+        botones = tk.Frame(marco, bg=C["surface"])
+        botones.pack(fill="x", padx=16, pady=16)
+
+        tk.Button(botones, text="Agregar conocimiento", font=FONT_BODY, fg=C["white"], bg="#22C55E",
+                  activebackground="#16A34A", relief="flat", bd=0, padx=14, pady=8,
+                  cursor="hand2", command=self._abrir_formulario_conocimiento).pack(side="left")
+        tk.Button(botones, text="Nueva consulta", font=FONT_BODY, fg=C["white"], bg=C["blue_400"],
+                  activebackground=C["blue_600"], relief="flat", bd=0, padx=14, pady=8,
+                  cursor="hand2", command=self._restart).pack(side="right")
 
     def _abrir_formulario_conocimiento(self):
-        ventana = tk.Toplevel(self)
-        ventana.title("Agregar conocimiento")
-        ventana.configure(bg=C["bg"])
-        ventana.geometry("620x560")
-        ventana.resizable(False, False)
-        ventana.transient(self)
-        ventana.grab_set()
+        self._clear_inner()
+        self._brand(self.inner, "Agregar conocimiento")
 
-        marco = tk.Frame(ventana, bg=C["surface"], highlightbackground=C["border"],
-                         highlightthickness=1)
-        marco.pack(fill="both", expand=True, padx=16, pady=16)
+        marco = tk.Frame(self.inner, bg=C["surface"])
+        marco.pack(fill="both", expand=True, padx=22)
 
-        canvas = tk.Canvas(marco, bg=C["surface"], highlightthickness=0)
-        scroll = ttk.Scrollbar(marco, orient="vertical", command=canvas.yview)
-        canvas.configure(yscrollcommand=scroll.set)
-
-        scroll.pack(side="right", fill="y")
-        canvas.pack(side="left", fill="both", expand=True)
-
-        contenido = tk.Frame(canvas, bg=C["surface"])
-        contenedor = canvas.create_window((0, 0), window=contenido, anchor="nw")
-
-        def ajustar_scroll(event=None):
-            canvas.configure(scrollregion=canvas.bbox("all"))
-
-        def ajustar_ancho(event):
-            canvas.itemconfig(contenedor, width=event.width)
-
-        contenido.bind("<Configure>", ajustar_scroll)
-        canvas.bind("<Configure>", ajustar_ancho)
-
-        encabezado = tk.Frame(contenido, bg=C["surface"])
+        encabezado = tk.Frame(marco, bg=C["surface"])
         encabezado.pack(fill="x", padx=16, pady=(16, 8))
-        tk.Label(encabezado, text="Regla basada en tus respuestas actuales",
+        tk.Label(encabezado, text="Agregar conocimiento al mismo árbol JSON",
                  font=FONT_HEAD, fg=C["blue_800"], bg=C["surface"]).pack(anchor="w")
         tk.Label(encabezado, text=self._formatear_base_hechos(), font=FONT_SMALL,
-                 fg=C["text_mut"], bg=C["surface"], justify="left", wraplength=520).pack(anchor="w", pady=(6, 0))
+                 fg=C["text_mut"], bg=C["surface"], justify="left", wraplength=540).pack(anchor="w", pady=(6, 0))
 
-        ruta = self.base_conocim.obtener_ultima_ruta()
-        if ruta:
-            tk.Label(encabezado, text="Ruta seleccionada: " + " > ".join(ruta),
-                     font=FONT_SMALL, fg=C["blue_600"], bg=C["surface"],
-                     justify="left", wraplength=520).pack(anchor="w", pady=(6, 0))
+        form = tk.Frame(marco, bg=C["surface"])
+        form.pack(fill="both", expand=True, padx=16, pady=(0, 8))
+        form.columnconfigure(0, weight=1)
 
-        body = tk.Frame(contenido, bg=C["surface"])
-        body.pack(fill="both", expand=True, padx=16, pady=(0, 8))
-
-        tipo_var = tk.StringVar()
-        esencia_var = tk.StringVar()
-        lugar_var = tk.StringVar()
+        respuesta_var = tk.StringVar()
+        opcion_id = self.posicion_arbol["opcion_id"] if self.posicion_arbol else ""
+        imagen_origen_var = tk.StringVar(value="")
+        imagen_destino_var = tk.StringVar(value="")
 
         def campo_texto(label, variable, row):
-            tk.Label(body, text=label, font=FONT_SMALL, fg=C["blue_600"], bg=C["surface"]).grid(
+            tk.Label(form, text=label, font=FONT_SMALL, fg=C["blue_600"], bg=C["surface"]).grid(
                 row=row, column=0, sticky="w", pady=(0, 4)
             )
-            entry = tk.Entry(body, textvariable=variable, font=FONT_BODY,
+            entry = tk.Entry(form, textvariable=variable, font=FONT_BODY,
                              fg=C["blue_800"], bg=C["blue_50"], relief="flat")
             entry.grid(row=row + 1, column=0, sticky="ew", pady=(0, 10))
             return entry
 
-        body.columnconfigure(0, weight=1)
-        campo_texto("Nombre del nuevo resultado", tipo_var, 0)
-        campo_texto("Esencia", esencia_var, 2)
-        campo_texto("Lugar", lugar_var, 4)
+        campo_texto("Respuesta", respuesta_var, 0)
+
+        tk.Label(form, text="Imagen JPG", font=FONT_SMALL, fg=C["blue_600"], bg=C["surface"]).grid(
+            row=2, column=0, sticky="w", pady=(0, 4)
+        )
+        imagen_row = tk.Frame(form, bg=C["surface"])
+        imagen_row.grid(row=3, column=0, sticky="ew", pady=(0, 10))
+        imagen_row.columnconfigure(0, weight=1)
+
+        imagen_lbl = tk.Label(imagen_row, text="Ninguna imagen seleccionada", font=FONT_SMALL,
+                              fg=C["text_mut"], bg=C["blue_50"], anchor="w",
+                              padx=10, pady=8)
+        imagen_lbl.grid(row=0, column=0, sticky="ew")
+
+        def seleccionar_imagen():
+            ruta = filedialog.askopenfilename(
+                parent=self,
+                title="Seleccionar imagen JPG",
+                filetypes=[("Imágenes JPG", "*.jpg")],
+            )
+            if not ruta:
+                return
+
+            ruta_path = Path(ruta)
+            if ruta_path.suffix.lower() != ".jpg":
+                error_lbl.config(text="Solo se permiten imágenes con formato .jpg.")
+                return
+
+            imagen_origen_var.set(str(ruta_path))
+            imagen_lbl.config(text=ruta_path.name)
+            error_lbl.config(text="")
+
+        tk.Button(imagen_row, text="Seleccionar JPG", font=FONT_BODY,
+                  fg=C["white"], bg=C["blue_400"], activebackground=C["blue_600"],
+                  relief="flat", bd=0, padx=14, pady=8, cursor="hand2",
+                  command=seleccionar_imagen).grid(row=1, column=0, sticky="w", pady=(8, 0))
 
         def campo_area(label, row):
-            tk.Label(body, text=label, font=FONT_SMALL, fg=C["blue_600"], bg=C["surface"]).grid(
+            tk.Label(form, text=label, font=FONT_SMALL, fg=C["blue_600"], bg=C["surface"]).grid(
                 row=row, column=0, sticky="w", pady=(0, 4)
             )
-            text = tk.Text(body, height=4, font=FONT_BODY, fg=C["blue_800"], bg=C["blue_50"],
+            text = tk.Text(form, height=5, font=FONT_BODY, fg=C["blue_800"], bg=C["blue_50"],
                            relief="flat", bd=0, wrap="word", padx=10, pady=8)
             text.grid(row=row + 1, column=0, sticky="ew", pady=(0, 10))
             return text
 
-        descripcion_txt = campo_area("Descripción", 6)
-        recomendacion_txt = campo_area("Recomendación", 8)
-        dato_txt = campo_area("Dato del lugar", 10)
+        explicacion_txt = campo_area("Explicación", 4)
 
-        error_lbl = tk.Label(body, text="", font=FONT_SMALL, fg="#B91C1C", bg=C["surface"])
-        error_lbl.grid(row=12, column=0, sticky="w", pady=(0, 6))
+        error_lbl = tk.Label(form, text="", font=FONT_SMALL, fg="#B91C1C", bg=C["surface"])
+        error_lbl.grid(row=6, column=0, sticky="w", pady=(0, 6))
 
         footer = tk.Frame(marco, bg=C["surface"])
-        footer.pack(fill="x", side="bottom", padx=16, pady=(0, 16))
-
-        btns = tk.Frame(footer, bg=C["surface"])
-        btns.pack(anchor="center")
+        footer.pack(fill="x", padx=16, pady=(0, 16))
 
         def guardar():
-            tipo = tipo_var.get().strip().upper()
-            esencia = esencia_var.get().strip()
-            lugar = lugar_var.get().strip()
-            descripcion = descripcion_txt.get("1.0", "end").strip()
-            recomendacion = recomendacion_txt.get("1.0", "end").strip()
-            dato_lugar = dato_txt.get("1.0", "end").strip()
-
-            if not all([tipo, esencia, lugar, descripcion, recomendacion, dato_lugar]):
-                error_lbl.config(text="Completa todos los campos antes de agregar el conocimiento.")
+            if not self.posicion_arbol:
+                error_lbl.config(text="Primero resuelve una consulta para saber dónde guardar el conocimiento.")
                 return
 
-            error_lbl.config(text="")
+            respuesta = respuesta_var.get().strip()
+            explicacion = explicacion_txt.get("1.0", "end").strip()
+            imagen_origen = imagen_origen_var.get().strip()
 
-            self.base_conocim.agregar_regla(
-                self.hechos,
-                {
-                    "tipo": tipo,
-                    "esencia": esencia,
-                    "lugar": lugar,
-                },
-                regla_id=f"USUARIO_{tipo}",
-                textos={
-                    "descripcion": descripcion,
-                    "recomendacion": recomendacion,
-                    "dato_lugar": dato_lugar,
-                },
-                ruta=self.base_conocim.obtener_ultima_ruta(),
-            )
-            self.mod_expl.TEXTOS.update(self.base_conocim.obtener_textos())
-            ventana.destroy()
+            if not all([respuesta, explicacion, imagen_origen]):
+                error_lbl.config(text="Completa la respuesta, la imagen JPG y la explicación.")
+                return
+
+            opcion_id_guardar = opcion_id or self.posicion_arbol["opcion_id"]
+
+            rama = next((nodo for nodo in self._arbol_data.get("arbol", []) if nodo.get("id") == self.posicion_arbol["rama"]), None)
+            if not rama:
+                error_lbl.config(text="No se encontró la rama destino en el árbol.")
+                return
+
+            nombre_imagen = f"{opcion_id_guardar[2:]}.jpg"
+            destino_dir = Path(__file__).with_name("imgs") / rama["id"]
+            destino_dir.mkdir(parents=True, exist_ok=True)
+            destino_path = destino_dir / nombre_imagen
+
+            try:
+                shutil.copyfile(imagen_origen, destino_path)
+            except OSError as exc:
+                error_lbl.config(text=f"No se pudo guardar la imagen: {exc}")
+                return
+
+            opciones = rama.setdefault("opciones", [])
+            nueva_opcion = {
+                "id": opcion_id_guardar,
+                "respuesta": respuesta,
+                "imagen": f"/imgs/{rama['id']}/{nombre_imagen}",
+                "explicacion": explicacion,
+            }
+
+            existente = next((item for item in opciones if item.get("id") == opcion_id_guardar), None)
+            if existente:
+                existente.update(nueva_opcion)
+            else:
+                opciones.append(nueva_opcion)
+                opciones.sort(key=lambda item: int(item.get("id", "op0")[2:]))
+
+            with self._arbol_path.open("w", encoding="utf-8") as archivo:
+                json.dump(self._arbol_data, archivo, ensure_ascii=False, indent=2)
+
+            self._arbol_data = self._cargar_arbol_json()
             self._show_result()
 
-        tk.Button(btns, text="Agregar conocimiento", font=FONT_BODY,
+        tk.Button(footer, text="Guardar en árbol", font=FONT_BODY,
                   fg=C["white"], bg=C["success"],
-                  activebackground="#16A34A",
-                  relief="flat", bd=0, padx=14, pady=8,
-                  cursor="hand2", command=guardar).pack()
-
-        canvas.yview_moveto(0)
+                  activebackground="#16A34A", relief="flat", bd=0, padx=14, pady=8,
+                  cursor="hand2", command=guardar).pack(side="left")
+        tk.Button(footer, text="Cancelar", font=FONT_BODY,
+                  fg=C["white"], bg=C["blue_400"],
+                  activebackground=C["blue_600"], relief="flat", bd=0, padx=14, pady=8,
+                  cursor="hand2", command=self._show_no_match).pack(side="right")
 
     def _restart(self):
         self.current = 0

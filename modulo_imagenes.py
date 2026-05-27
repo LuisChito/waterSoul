@@ -30,6 +30,30 @@ COLORES_RESPALDO = {
 _cache: dict = {}
 
 
+def _resolver_ruta_local(ruta: str) -> str | None:
+    """Convierte una ruta del JSON en una ruta local valida del proyecto."""
+    if not ruta or not isinstance(ruta, str):
+        return None
+
+    ruta = ruta.strip()
+    if not ruta:
+        return None
+
+    if os.path.isabs(ruta) and os.path.exists(ruta):
+        return ruta
+
+    ruta_relativa = ruta.lstrip("/\\")
+    candidata = os.path.join(os.path.dirname(os.path.abspath(__file__)), ruta_relativa)
+    if os.path.exists(candidata):
+        return candidata
+
+    candidata = os.path.abspath(ruta_relativa)
+    if os.path.exists(candidata):
+        return candidata
+
+    return None
+
+
 def _crear_gradiente(color1: str, color2: str, ancho: int, alto: int) -> Image.Image:
     """Crea una imagen de gradiente vertical entre dos colores hex."""
     img  = Image.new("RGB", (ancho, alto))
@@ -73,14 +97,22 @@ def obtener_imagen_tk(tipo: str, ancho: int = 480, alto: int = 220, url: str | N
         return _cache[key]
     img = None
 
-    # 1) Si se proporciona una URL, intentar descargarla
-    if url and isinstance(url, str) and url.lower().startswith("http"):
-        try:
-            with urllib.request.urlopen(url, timeout=8) as resp:
-                data = resp.read()
-            img = Image.open(io.BytesIO(data)).convert("RGB")
-        except Exception:
-            img = None
+    # 1) Si se proporciona una URL o ruta local, intentar resolverla primero.
+    if url and isinstance(url, str):
+        if url.lower().startswith(("http://", "https://")):
+            try:
+                with urllib.request.urlopen(url, timeout=8) as resp:
+                    data = resp.read()
+                img = Image.open(io.BytesIO(data)).convert("RGB")
+            except Exception:
+                img = None
+        else:
+            ruta_local = _resolver_ruta_local(url)
+            if ruta_local:
+                try:
+                    img = Image.open(ruta_local).convert("RGB")
+                except Exception:
+                    img = None
 
     # 2) Si no hay imagen remota, buscar imagen local por tipo
     if img is None:
